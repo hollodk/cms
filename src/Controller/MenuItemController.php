@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace Mh\PageBuilder\Controller;
 
-use App\Entity\MenuItem;
-use App\Form\MenuItemType;
-use App\Repository\MenuItemRepository;
+use Mh\PageBuilder\Entity\MenuItem;
+use Mh\PageBuilder\Form\MenuItemType;
+use Mh\PageBuilder\Repository\MenuItemRepository;
 use Cocur\Slugify\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

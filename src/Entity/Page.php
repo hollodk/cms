@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Entity;
+namespace Mh\PageBuilder\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PageRepository")
+ * @ORM\Entity(repositoryClass="Mh\PageBuilder\Repository\PageRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Page
@@ -40,7 +40,7 @@ class Page
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Menu", mappedBy="page")
+     * @ORM\OneToMany(targetEntity="Mh\PageBuilder\Entity\Menu", mappedBy="page")
      */
     private $menus;
 
@@ -50,7 +50,7 @@ class Page
     private $isFrontpage;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MenuItem", mappedBy="page")
+     * @ORM\OneToMany(targetEntity="Mh\PageBuilder\Entity\MenuItem", mappedBy="page")
      */
     private $menuItems;
 

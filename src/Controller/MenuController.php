@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace Mh\PageBuilder\Controller;
 
-use App\Entity\Menu;
-use App\Form\MenuType;
-use App\Repository\MenuRepository;
+use Mh\PageBuilder\Entity\Menu;
+use Mh\PageBuilder\Form\MenuType;
+use Mh\PageBuilder\Repository\MenuRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

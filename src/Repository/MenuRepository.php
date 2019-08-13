@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace Mh\PageBuilder\Repository;
 
-use App\Entity\Menu;
+use Mh\PageBuilder\Entity\Menu;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
