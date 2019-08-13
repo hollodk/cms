@@ -1,0 +1,11 @@
+{
+    "name": "mh/cms",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Michael Holm",
+            "email": "hollo@hollo.dk"
+        }
+    ],
+    "require": {}
+}

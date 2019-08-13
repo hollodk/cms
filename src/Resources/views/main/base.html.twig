@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <a href="{{ path('main') }}">Home</a> |
+        {% for item in menu.menuItems %}
+        <a href="{{ path('wildcard', {'page':item.slug}) }}">{{ item.title }}</a> |
+        {% endfor %}
+        <a href="{{ path('admin') }}">Admin</a> |
+
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
