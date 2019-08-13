@@ -9,7 +9,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Mh\\PageBundle\\": "src"
+            "Mh\\PageBundle\\": ""
         }
     },
     "require": {}
