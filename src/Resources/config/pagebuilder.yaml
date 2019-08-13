@@ -1,0 +1,15 @@
+#wildcard:
+#path: /{page}
+#methods: [GET]
+#controller: Mh\PageBundle\Controller\MainController::page
+
+services:
+    Mh\PageBundle\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    Mh\PageBundle\Repository\:
+        resource: '../src/Repository'
+        tags: ['doctrine.repository_service']
+        arguments: ['@doctrine']
+

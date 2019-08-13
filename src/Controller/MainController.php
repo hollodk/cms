@@ -1,8 +1,8 @@
 <?php
 
-namespace Mh\PageBuilder\Controller;
+namespace Mh\PageBundle\Controller;
 
-use Mh\PageBuilder\Entity\Page;
+use Mh\PageBundle\Entity\Page;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +16,7 @@ class MainController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $page = $em->getRepository('Mh\PageBuilder:Page')->findOneByIsFrontpage(true);
+        $page = $em->getRepository('Mh\PageBundle:Page')->findOneByIsFrontpage(true);
 
         return $this->build($page);
     }
@@ -25,7 +25,7 @@ class MainController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $menuItem = $em->getRepository('Mh\PageBuilder:MenuItem')->findOneBySlug($request->get('page'));
+        $menuItem = $em->getRepository('Mh\PageBundle:MenuItem')->findOneBySlug($request->get('page'));
         $page = $menuItem->getPage();
 
         return $this->build($page);
@@ -35,7 +35,7 @@ class MainController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $menu = $em->getRepository('Mh\PageBuilder:Menu')->findOneBy(
+        $menu = $em->getRepository('Mh\PageBundle:Menu')->findOneBy(
             [],
             ['id' => 'DESC']
         );

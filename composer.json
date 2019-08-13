@@ -1,5 +1,5 @@
 {
-    "name": "mh/pagebuilder",
+    "name": "mh/page-bundle",
     "type": "library",
     "authors": [
         {
@@ -9,7 +9,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Mh\\PageBuilder\\": "src"
+            "Mh\\PageBundle\\": "src"
         }
     },
     "require": {}

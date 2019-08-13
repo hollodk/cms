@@ -1,11 +1,11 @@
 <?php
 
-namespace Mh\PageBuilder\Entity;
+namespace Mh\PageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Mh\PageBuilder\Repository\MenuItemRepository")
+ * @ORM\Entity(repositoryClass="Mh\PageBundle\Repository\MenuItemRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class MenuItem
@@ -38,12 +38,12 @@ class MenuItem
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Mh\PageBuilder\Entity\Menu", inversedBy="menuItems")
+     * @ORM\ManyToOne(targetEntity="Mh\PageBundle\Entity\Menu", inversedBy="menuItems")
      */
     private $menu;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Mh\PageBuilder\Entity\Page", inversedBy="menuItems")
+     * @ORM\ManyToOne(targetEntity="Mh\PageBundle\Entity\Page", inversedBy="menuItems")
      */
     private $page;
 

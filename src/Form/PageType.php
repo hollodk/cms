@@ -1,8 +1,8 @@
 <?php
 
-namespace Mh\PageBuilder\Form;
+namespace Mh\PageBundle\Form;
 
-use Mh\PageBuilder\Entity\Page;
+use Mh\PageBundle\Entity\Page;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

@@ -1,13 +1,13 @@
 <?php
 
-namespace Mh\PageBuilder\Entity;
+namespace Mh\PageBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Mh\PageBuilder\Repository\MenuRepository")
+ * @ORM\Entity(repositoryClass="Mh\PageBundle\Repository\MenuRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Menu
@@ -35,7 +35,7 @@ class Menu
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Mh\PageBuilder\Entity\MenuItem", mappedBy="menu")
+     * @ORM\OneToMany(targetEntity="Mh\PageBundle\Entity\MenuItem", mappedBy="menu")
      */
     private $menuItems;
 

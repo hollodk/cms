@@ -1,6 +1,6 @@
 <?php
 
-namespace Mh\PageBuilder;
+namespace Mh\PageBundle;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;

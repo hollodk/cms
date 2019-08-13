@@ -1,10 +1,10 @@
 <?php
 
-namespace Mh\PageBuilder\Controller;
+namespace Mh\PageBundle\Controller;
 
-use Mh\PageBuilder\Entity\Page;
-use Mh\PageBuilder\Form\PageType;
-use Mh\PageBuilder\Repository\PageRepository;
+use Mh\PageBundle\Entity\Page;
+use Mh\PageBundle\Form\PageType;
+use Mh\PageBundle\Repository\PageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
