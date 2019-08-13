@@ -1,6 +1,6 @@
 {
     "name": "mh/page-bundle",
-    "type": "library",
+    "type": "symfony-bundle",
     "authors": [
         {
             "name": "Michael Holm",
