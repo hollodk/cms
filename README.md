@@ -30,10 +30,14 @@ doctrine:
 {% extends "@MhPage/base.html.twig" %}
 
 
-### template main.html.twig
+### template layout.html.twig
 
-{% extends "@MhPage/base.html.twig" %}
+{% extends "@MhPage/layout.html.twig" %}
 
+
+#### Post work
+
+Remember to run ./bin/console assets:install --symlink
 
 
 ##### DEV VERSION
