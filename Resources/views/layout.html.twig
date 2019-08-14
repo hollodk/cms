@@ -63,9 +63,11 @@
                                 <nav>
                                     <ul>
                                         <li><a href="{{ path('mh_page_main') }}">Home</a></li>
+                                        {% if menu %}
                                         {% for item in menu.menuItems %}
                                         <li><a href="{{ path('mh_page_wildcard', {'page':item.slug}) }}">{{ item.title }}</a></li>
                                         {% endfor %}
+                                        {% endif %}
                                         <li><a href="{{ path('mh_page_admin') }}">Admin</a></li>
                                     </ul>
                                 </nav>

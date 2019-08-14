@@ -40,7 +40,7 @@ class PageController extends AbstractController
             $entityManager->persist($page);
             $entityManager->flush();
 
-            return $this->redirectToRoute('page_index');
+            return $this->redirectToRoute('mh_page_page_index');
         }
 
         return $this->render('@MhPage/page/new.html.twig', [
@@ -70,7 +70,7 @@ class PageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('page_index');
+            return $this->redirectToRoute('mh_page_page_index');
         }
 
         return $this->render('@MhPage/page/edit.html.twig', [
@@ -90,6 +90,6 @@ class PageController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('page_index');
+        return $this->redirectToRoute('mh_page_page_index');
     }
 }

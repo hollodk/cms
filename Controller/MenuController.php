@@ -39,7 +39,7 @@ class MenuController extends AbstractController
             $entityManager->persist($menu);
             $entityManager->flush();
 
-            return $this->redirectToRoute('menu_index');
+            return $this->redirectToRoute('mh_page_menu_index');
         }
 
         return $this->render('@MhPage/menu/new.html.twig', [
@@ -69,7 +69,7 @@ class MenuController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('menu_index');
+            return $this->redirectToRoute('mh_page_menu_index');
         }
 
         return $this->render('@MhPage/menu/edit.html.twig', [
@@ -89,6 +89,6 @@ class MenuController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('menu_index');
+        return $this->redirectToRoute('mh_page_menu_index');
     }
 }
