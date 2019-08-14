@@ -17,6 +17,9 @@ class MainController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
         $page = $em->getRepository('Mh\PageBundle:Page')->findOneByIsFrontpage(true);
+        if (!$page) {
+            throw new \Exception('No frontpage found, you need to configure the system');
+        }
 
         return $this->build($page);
     }

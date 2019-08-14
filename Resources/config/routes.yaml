@@ -1,0 +1,8 @@
+mh_page:
+    resource: '@MhPageBundle/Controller/'
+    name_prefix: mh_page_
+
+mh_page_wildcard:
+    path: /{page}
+    methods: [GET]
+    controller: Mh\PageBundle\Controller\MainController::page

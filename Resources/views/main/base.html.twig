@@ -6,11 +6,11 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        <a href="{{ path('main') }}">Home</a> |
+        <a href="{{ path('mh_page_main') }}">Home</a> |
         {% for item in menu.menuItems %}
-        <a href="{{ path('wildcard', {'page':item.slug}) }}">{{ item.title }}</a> |
+        <a href="{{ path('mh_page_wildcard', {'page':item.slug}) }}">{{ item.title }}</a> |
         {% endfor %}
-        <a href="{{ path('admin') }}">Admin</a> |
+        <a href="{{ path('mh_page_admin') }}">Admin</a> |
 
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
