@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Create new Page</h1>
 
-    {{ include('page/_form.html.twig') }}
+    {{ include('@MhPage/page/_form.html.twig') }}
 
     <a href="{{ path('mh_page_page_index') }}">back to list</a>
 {% endblock %}

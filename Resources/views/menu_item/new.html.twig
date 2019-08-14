@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Create new MenuItem</h1>
 
-    {{ include('menu_item/_form.html.twig') }}
+    {{ include('@MhPage/menu_item/_form.html.twig') }}
 
     <a href="{{ path('mh_page_menu_item_index') }}">back to list</a>
 {% endblock %}

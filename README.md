@@ -30,6 +30,12 @@ doctrine:
 {% extends "@MhPage/base.html.twig" %}
 
 
+### template main.html.twig
+
+{% extends "@MhPage/base.html.twig" %}
+
+
+
 ##### DEV VERSION
 
 #### Config file
