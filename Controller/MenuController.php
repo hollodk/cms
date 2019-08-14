@@ -20,7 +20,7 @@ class MenuController extends AbstractController
      */
     public function index(MenuRepository $menuRepository): Response
     {
-        return $this->render('menu/index.html.twig', [
+        return $this->render('@MhPage/menu/index.html.twig', [
             'menus' => $menuRepository->findAll(),
         ]);
     }
@@ -42,7 +42,7 @@ class MenuController extends AbstractController
             return $this->redirectToRoute('menu_index');
         }
 
-        return $this->render('menu/new.html.twig', [
+        return $this->render('@MhPage/menu/new.html.twig', [
             'menu' => $menu,
             'form' => $form->createView(),
         ]);
@@ -53,7 +53,7 @@ class MenuController extends AbstractController
      */
     public function show(Menu $menu): Response
     {
-        return $this->render('menu/show.html.twig', [
+        return $this->render('@MhPage/menu/show.html.twig', [
             'menu' => $menu,
         ]);
     }
@@ -72,7 +72,7 @@ class MenuController extends AbstractController
             return $this->redirectToRoute('menu_index');
         }
 
-        return $this->render('menu/edit.html.twig', [
+        return $this->render('@MhPage/menu/edit.html.twig', [
             'menu' => $menu,
             'form' => $form->createView(),
         ]);

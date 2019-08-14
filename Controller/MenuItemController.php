@@ -21,7 +21,7 @@ class MenuItemController extends AbstractController
      */
     public function index(MenuItemRepository $menuItemRepository): Response
     {
-        return $this->render('menu_item/index.html.twig', [
+        return $this->render('@MhPage/menu_item/index.html.twig', [
             'menu_items' => $menuItemRepository->findAll(),
         ]);
     }
@@ -46,7 +46,7 @@ class MenuItemController extends AbstractController
             return $this->redirectToRoute('menu_item_index');
         }
 
-        return $this->render('menu_item/new.html.twig', [
+        return $this->render('@MhPage/menu_item/new.html.twig', [
             'menu_item' => $menuItem,
             'form' => $form->createView(),
         ]);
@@ -57,7 +57,7 @@ class MenuItemController extends AbstractController
      */
     public function show(MenuItem $menuItem): Response
     {
-        return $this->render('menu_item/show.html.twig', [
+        return $this->render('@MhPage/menu_item/show.html.twig', [
             'menu_item' => $menuItem,
         ]);
     }
@@ -79,7 +79,7 @@ class MenuItemController extends AbstractController
             return $this->redirectToRoute('menu_item_index');
         }
 
-        return $this->render('menu_item/edit.html.twig', [
+        return $this->render('@MhPage/menu_item/edit.html.twig', [
             'menu_item' => $menuItem,
             'form' => $form->createView(),
         ]);

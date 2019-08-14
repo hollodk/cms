@@ -43,7 +43,7 @@ class MainController extends AbstractController
             ['id' => 'DESC']
         );
 
-        return $this->render('main/index.html.twig', [
+        return $this->render('@MhPage/main/index.html.twig', [
             'page' => $page,
             'menu' => $menu,
         ]);

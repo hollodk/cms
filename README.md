@@ -25,6 +25,10 @@ doctrine:
                 alias: Mh\PageBundle
 
 
+### template base.html.twig
+
+{% extends "@MhPage/base.html.twig" %}
+
 
 ##### DEV VERSION
 
@@ -66,5 +70,4 @@ doctrine:
                 dir: '%kernel.project_dir%/vendor/mh/page-bundle/Entity'
                 prefix: 'Mh\PageBundle\Entity'
                 alias: Mh\PageBundle
-
 
