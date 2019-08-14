@@ -12,7 +12,7 @@
             "Mh\\PageBundle\\": ""
         }
     },
-    "require": {}
+    "require": {},
     "require-dev": {
         "symfony/var-dumper": "4.3.*"
     }
