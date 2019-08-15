@@ -22,7 +22,7 @@
             {% endif %}
 
             <div class="content col-lg-{{ col }}">
-                {{ page.content|raw }}
+                {{ content|raw }}
             </div>
 
             {% if sidebar.left is defined and sidebar.left == true %}
@@ -33,7 +33,7 @@
         </div>
 
         {% else %}
-        {{ page.content|raw }}
+        {{ content|raw }}
         {% endif %}
     </div>
 </section>

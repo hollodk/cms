@@ -5,6 +5,7 @@ namespace Mh\PageBundle\Controller;
 use Mh\PageBundle\Entity\Page;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
@@ -62,12 +63,55 @@ class MainController extends AbstractController
             ['priority' => 'ASC']
         );
 
+        $html = $this->process($page->getContent());
+
         return $this->render('@MhPage/main/index.html.twig', [
             'page' => $page,
             'menu' => $menu,
             'menu_items' => $items,
             'site' => $this->getSite(),
+            'content' => $html,
         ]);
+    }
+
+    private function process($html)
+    {
+        $twig = $this->get('twig');
+
+        $html = preg_replace_callback(
+            '/__template:(.*)__/',
+            function($input) use ($twig) {
+                return $twig->render($input[1]);
+            },
+            $html
+        );
+
+        $container = $this->container;
+
+        $html = preg_replace_callback(
+            '/__render:(.*)__/',
+            function($input) use ($container) {
+                try {
+                    $o = preg_split("/::/", $input[1]);
+                    $method = $o[1];
+
+                    $controller = $container->get($o[0]);
+
+                    if (!method_exists($controller, $method)) {
+                        throw new \Exception('Method does not exist');
+                    }
+
+                    return $controller->$method()->getContent();
+
+                } catch (\Exception $e) {
+                    return 'Error occur while render: '.$input[1];
+                }
+
+            },
+            $html
+        );
+
+        return $html;
     }
 
     private function getSite()
