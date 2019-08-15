@@ -1,0 +1,63 @@
+{% set tc = config.topbar %}
+
+{% set class = '' %}
+{% if tc.type == 'dark' %}
+{% set class = 'dark' %}
+{% elseif tc.type == 'transparent' %}
+{% set class = 'topbar-transparent dark' %}
+{% elseif tc.type == 'colored' %}
+{% set class = 'topbar-colored dark' %}
+{% endif %}
+
+{% set fullwidth = '' %}
+{% if tc.fullwidth is defined and config.topbar.fullwidth == true %}
+{% set fullwidth = ' topbar-fullwidth d-none d-xl-block d-lg-block' %}
+{% endif %}
+
+{% if tc.type is defined and tc.type != 'none' %}
+<div id="topbar" class="{{ class }}{{ fullwidth }}">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="top-menu">
+                    {% if tc.phone is defined and tc.phone != '' %}
+                    <li><a href="#">Phone: {{ tc.phone }}</a></li>
+                    {% endif %}
+                    {% if tc.email is defined and tc.email != '' %}
+                    <li><a href="#">Email: {{ tc.email }}</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="col-md-6 d-none d-sm-block">
+                <div class="social-icons social-icons-colored-hover">
+                    <ul>
+                        {% if tc.facebook_url is defined and tc.facebook_url != '' %}
+                        <li class="social-facebook"><a href="{{ tc.facebook_url }}"><i class="fab fa-facebook-f"></i></a></li>
+                        {% endif %}
+                        {% if tc.twitter_url is defined and tc.twitter_url != '' %}
+                        <li class="social-twitter"><a href="{{ tc.twitter_url }}"><i class="fab fa-twitter"></i></a></li>
+                        {% endif %}
+                        {% if tc.pinterest_url is defined and tc.pinterest_url != '' %}
+                        <li class="social-pinterest"><a href="{{ tc.pinterest_url }}"><i class="fab fa-pinterest"></i></a></li>
+                        {% endif %}
+                        {% if tc.vimeo_url is defined and tc.vimeo_url != '' %}
+                        <li class="social-vimeo"><a href="{{ tc.vimeo_url }}"><i class="fab fa-vimeo"></i></a></li>
+                        {% endif %}
+                        {% if tc.linkedin_url is defined and tc.linkedin_url != '' %}
+                        <li class="social-linkedin"><a href="{{ tc.linkedin_url }}"><i class="fab fa-linkedin"></i></a></li>
+                        {% endif %}
+                        {% if tc.dribble_url is defined and tc.dribble_url != '' %}
+                        <li class="social-dribbble"><a href="{{ tc.dribble_url }}"><i class="fab fa-dribbble"></i></a></li>
+                        {% endif %}
+                        {% if tc.youtube_url is defined and tc.youtube_url != '' %}
+                        <li class="social-youtube"><a href="{{ tc.youtube_url }}"><i class="fab fa-youtube"></i></a></li>
+                        {% endif %}
+                        <li class="social-rss"><a href="#"><i class="fa fa-rss"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+

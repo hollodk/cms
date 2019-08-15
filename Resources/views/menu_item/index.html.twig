@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Page</th>
                 <th>Title</th>
                 <th>Slug</th>
                 <th>Url</th>
@@ -21,6 +22,7 @@
         {% for menu_item in menu_items %}
             <tr>
                 <td>{{ menu_item.id }}</td>
+                <td>{{ menu_item.page.header }}</td>
                 <td>{{ menu_item.title }}</td>
                 <td>{{ menu_item.slug }}</td>
                 <td><a href="{{ url('mh_page_wildcard', {'page':menu_item.slug}) }}">{{ url('mh_page_wildcard', {'page':menu_item.slug}) }}</a></td>

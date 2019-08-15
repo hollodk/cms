@@ -1,0 +1,82 @@
+{% set hc = config.header %}
+
+{% set fixed = '' %}
+{% if hc.always_fixed is defined and hc.always_fixed == true %}
+{% set fixed = ' header-always-fixed' %}
+{% endif %}
+
+{% set mini = '' %}
+{% if hc.mini is defined and hc.mini == true %}
+{% set mini = ' header-mini' %}
+{% endif %}
+
+{% set modern = '' %}
+{% if hc.modern is defined and hc.modern == true %}
+{% set modern = ' header-modern' %}
+{% endif %}
+
+{% set logoposition = '' %}
+{% if hc.logo is defined %}
+{% if hc.logo == 'right' %}
+{% set logoposition = ' header-logo-right' %}
+{% endif %}
+{% endif %}
+
+{% set fixeddisabled = '' %}
+{% if hc.fixed_disabled is defined and hc.fixed_disabled == true %}
+{% set fixeddisabled = ' header-disable-fixed' %}
+{% endif %}
+
+{% set fullwidth = '' %}
+{% if hc.fullwidth is defined and hc.fullwidth == true %}
+{% set fullwidth = 'data-fullwidth="true"' %}
+{% endif %}
+
+{% set transparent = '' %}
+{% if hc.transparent is defined and hc.transparent == true %}
+{% set transparent = 'data-transparent="true"' %}
+{% endif %}
+
+{% set responsive = '' %}
+{% if hc.responsive is defined and hc.responsive == true %}
+{% set responsive = 'data-responsive-fixed="true"' %}
+{% endif %}
+
+<header id="header" class="{{ config.header.type }}{{ modern }}{{ mini }}{{ logoposition }}{{ fixed }}{{ fixeddisabled }}" {{ fullwidth|raw }} {{ transparent|raw }} {{ responsive|raw }}>
+    <div class="header-inner">
+        <div class="container">
+
+            <div id="logo">
+                <a href="{{ path('mh_page_main') }}" class="logo" data-src-dark="{{ asset('bundles/mhpage/images/logo-dark.png') }}">
+                    <img src="{{ asset('bundles/mhpage/images/logo.png') }}" alt="{{ site.title }}">
+                </a>
+            </div>
+
+            <div id="mainMenu-trigger">
+                <button class="lines-button x"> <span class="lines"></span> </button>
+            </div>
+
+            <div id="mainMenu" {% if hc.menu_position is defined %}class="{{ hc.menu_position }}"{% endif %}>
+                <div class="container">
+                    <nav>
+                        <ul>
+                            {% if config.show_home is defined and config.show_home == true %}
+                            <li><a href="{{ path('mh_page_main') }}">Home</a></li>
+                            {% endif %}
+                            {% if menu %}
+                            {% for item in menu.menuItems %}
+                            <li><a href="{{ path('mh_page_wildcard', {'page':item.slug}) }}">{{ item.title }}</a></li>
+                            {% endfor %}
+                            {% endif %}
+                            {% if config.show_admin is defined and config.show_admin == true %}
+                            <li><a href="{{ path('mh_page_admin') }}">Admin</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</header>
+

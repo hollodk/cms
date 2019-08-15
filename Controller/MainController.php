@@ -48,7 +48,19 @@ class MainController extends AbstractController
         return $this->render('@MhPage/main/index.html.twig', [
             'page' => $page,
             'menu' => $menu,
+            'site' => $this->getSite(),
         ]);
+    }
 
+    private function getSite()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $site = $em->getRepository('Mh\PageBundle:Site')->findOneBy(
+            [],
+            ['id' => 'DESC']
+        );
+
+        return $site;
     }
 }

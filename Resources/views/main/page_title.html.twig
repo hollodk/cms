@@ -1,0 +1,52 @@
+{% set ptc = [] %}
+{% if config.pagetitle is defined %}
+{% set ptc = config.pagetitle %}
+{% endif %}
+
+{% set style = '' %}
+{% if ptc.type is defined %}
+{% if ptc.type == 'image' %}
+{% set style = 'background-image:url('~ptc.image_url~'); background-size: cover; background-position: center center;' %}
+{% elseif ptc.type == 'color' %}
+{% set style = 'background-color: '~ptc.color %}
+{% endif %}
+{% endif %}
+
+{% set position = '' %}
+{% if ptc.position is defined %}
+{% if ptc.position == 'left' %}
+{% set position = ' page-title-left' %}
+{% elseif ptc.position == 'right' %}
+{% set position = ' page-title-right' %}
+{% endif %}
+{% endif %}
+
+{% set text = '' %}
+{% if ptc.text is defined and ptc.text == 'light' %}
+{% set text = ' text-light' %}
+{% endif %}
+
+{% set fade = '' %}
+{% if ptc.animated is defined and ptc.animated == true %}
+{% set fade = 'data-animate="fadeInUp" data-animate-delay="1300"' %}
+{% endif %}
+
+<section id="page-title" class="{{ text }}{{ position }}" style="{{ style }}">
+    <div class="container">
+        {% if ptc.breadcrumb is defined and ptc.breadcrumb == true %}
+        <div class="breadcrumb" {{ fade|raw }}>
+            <ul>
+                <li><a href="#">Home</a> </li>
+                <li class="active"><a href="#">{{ page.header }}</a> </li>
+            </ul>
+        </div>
+        {% endif %}
+        <div class="page-title" {{ fade|raw }}>
+            <h1>{{ page.header }}</h1>
+            {% if ptc.sub_header is defined and ptc.sub_header != '' %}
+            <span>{{ ptc.sub_header }}</span>
+            {% endif %}
+        </div>
+    </div>
+</section>
+

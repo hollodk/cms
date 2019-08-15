@@ -54,6 +54,16 @@ class Page
      */
     private $menuItems;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $attribute;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Mh\PageBundle\Entity\Site", inversedBy="pages")
+     */
+    private $site;
+
 
     public function __toString()
     {
@@ -208,5 +218,53 @@ class Page
         }
 
         return $this;
+    }
+
+    public function getAttribute(): ?string
+    {
+        return $this->attribute;
+    }
+
+    public function setAttribute(?string $attribute): self
+    {
+        $this->attribute = $attribute;
+
+        return $this;
+    }
+
+    public function getSite(): ?Site
+    {
+        return $this->site;
+    }
+
+    public function setSite(?Site $site): self
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    public function getPageConfig()
+    {
+        $attr = json_decode($this->getSite()->getAttribute(), true);
+        $page = json_decode($this->getAttribute(), true);
+
+        if ($page == null) {
+            $page = [];
+        }
+
+        foreach ($page as $key=>$value) {
+            if (!isset($attr[$key])) {
+                $attr[$key] = $value;
+            }
+        }
+
+        foreach ($page as $k1=>$v1) {
+            foreach ($v1 as $k2=>$v2) {
+                $attr[$k1][$k2] = $v2;
+            }
+        }
+
+        return $attr;
     }
 }
