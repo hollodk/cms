@@ -29,8 +29,9 @@ class PageType extends AbstractType
             ])
             ->add('header', null, $opt)
             ->add('content', TextareaType::class, [
+                'required' => false,
                 'attr' => [
-                    'rows' => 10,
+                    'rows' => 30,
                     'class' => $attr['class'],
                 ],
             ])

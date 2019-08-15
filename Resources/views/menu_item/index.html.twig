@@ -9,9 +9,10 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Page</th>
+                <th>Priority</th>
                 <th>Title</th>
                 <th>Slug</th>
+                <th>Page</th>
                 <th>Url</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
@@ -22,15 +23,16 @@
         {% for menu_item in menu_items %}
             <tr>
                 <td>{{ menu_item.id }}</td>
-                <td>{{ menu_item.page.header }}</td>
+                <td>{{ menu_item.priority }}</td>
                 <td>{{ menu_item.title }}</td>
                 <td>{{ menu_item.slug }}</td>
+                <td><a href="{{ path('mh_page_page_edit', {'id':menu_item.page.id}) }}">{{ menu_item.page.header }}</a></td>
                 <td><a href="{{ url('mh_page_wildcard', {'page':menu_item.slug}) }}">{{ url('mh_page_wildcard', {'page':menu_item.slug}) }}</a></td>
                 <td>{{ menu_item.createdAt ? menu_item.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ menu_item.updatedAt ? menu_item.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('mh_page_menu_item_show', {'id': menu_item.id}) }}">show</a>
-                    <a href="{{ path('mh_page_menu_item_edit', {'id': menu_item.id}) }}">edit</a>
+                    <a class="btn btn-sm btn-primary" href="{{ path('mh_page_menu_item_show', {'id': menu_item.id}) }}">show</a>
+                    <a class="btn btn-sm btn-primary" href="{{ path('mh_page_menu_item_edit', {'id': menu_item.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

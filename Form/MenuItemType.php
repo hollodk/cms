@@ -3,6 +3,7 @@
 namespace Mh\PageBundle\Form;
 
 use Mh\PageBundle\Entity\MenuItem;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -11,10 +12,25 @@ class MenuItemType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $attr = [
+            'class' => 'form-control',
+        ];
+
+        $opt = [
+            'attr' => $attr,
+        ];
+
         $builder
-            ->add('title')
-            ->add('menu')
-            ->add('page')
+            ->add('title', null, $opt)
+            ->add('priority', null, $opt)
+            ->add('menu', EntityType::class, [
+                'attr' => $attr,
+                'class' => 'Mh\PageBundle:Menu',
+            ])
+            ->add('page', EntityType::class, [
+                'attr' => $attr,
+                'class' => 'Mh\PageBundle:Page',
+            ])
         ;
     }
 

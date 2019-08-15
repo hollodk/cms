@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     /**
-     * @Route("/main", name="main")
+     * @Route("/", name="main")
      */
     public function index()
     {
@@ -26,11 +26,23 @@ class MainController extends AbstractController
         return $this->build($page);
     }
 
+    /**
+     * @Route("/play/page-{id}", name="main_play")
+     */
+    public function play(Page $page)
+    {
+        return $this->build($page);
+    }
+
     public function page(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $menuItem = $em->getRepository('Mh\PageBundle:MenuItem')->findOneBySlug($request->get('page'));
+        if (!$menuItem) {
+            throw new \Exception('page not found');
+        }
+
         $page = $menuItem->getPage();
 
         return $this->build($page);
@@ -45,9 +57,15 @@ class MainController extends AbstractController
             ['id' => 'DESC']
         );
 
+        $items = $em->getRepository('Mh\PageBundle:MenuItem')->findBy(
+            ['menu' => $menu],
+            ['priority' => 'ASC']
+        );
+
         return $this->render('@MhPage/main/index.html.twig', [
             'page' => $page,
             'menu' => $menu,
+            'menu_items' => $items,
             'site' => $this->getSite(),
         ]);
     }

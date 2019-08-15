@@ -23,8 +23,8 @@
                 <td>{{ site.createdAt ? site.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ site.updatedAt ? site.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('mh_page_site_show', {'id': site.id}) }}">show</a>
-                    <a href="{{ path('mh_page_site_edit', {'id': site.id}) }}">edit</a>
+                    <a class="btn btn-sm btn-primary" href="{{ path('mh_page_site_show', {'id': site.id}) }}">show</a>
+                    <a class="btn btn-sm btn-primary" href="{{ path('mh_page_site_edit', {'id': site.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

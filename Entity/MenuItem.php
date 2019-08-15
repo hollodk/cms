@@ -47,6 +47,11 @@ class MenuItem
      */
     private $page;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $priority = 50;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -139,5 +144,17 @@ class MenuItem
     public function preUpdate()
     {
         $this->setUpdatedAt(new \DateTime());
+    }
+
+    public function getPriority(): ?int
+    {
+        return $this->priority;
+    }
+
+    public function setPriority(int $priority): self
+    {
+        $this->priority = $priority;
+
+        return $this;
     }
 }
