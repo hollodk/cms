@@ -5,6 +5,7 @@
 {% block body %}
     <h1>Site index</h1>
 
+    <a class="btn btn-primary" href="{{ path('mh_page_site_new') }}">Create new</a>
     <table class="table">
         <thead>
             <tr>
@@ -34,6 +35,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('mh_page_site_new') }}">Create new</a>
 {% endblock %}

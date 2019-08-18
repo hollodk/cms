@@ -2,12 +2,12 @@
 
 namespace Mh\PageBundle\Form;
 
-use Mh\PageBundle\Entity\Menu;
+use Mh\PageBundle\Entity\Tag;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MenuType extends AbstractType
+class TagType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -20,14 +20,14 @@ class MenuType extends AbstractType
         ];
 
         $builder
-            ->add('title', null, $opt)
+            ->add('name', null, $opt)
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Menu::class,
+            'data_class' => Tag::class,
         ]);
     }
 }

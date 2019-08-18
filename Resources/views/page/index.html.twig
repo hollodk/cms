@@ -16,6 +16,9 @@
         </ul>
     </div>
 
+    <a class="btn btn-primary" href="{{ path('mh_page_page_new') }}">Create new</a>
+    <a class="btn btn-primary" href="{{ path('mh_page_page_wizard') }}">Wizard</a>
+
     <table class="table">
         <thead>
             <tr>
@@ -32,7 +35,10 @@
             <tr>
                 <td>{{ page.id }}</td>
                 <td>{{ page.site.title }}</td>
-                <td>{{ page.header }}</td>
+                <td>
+                    {{ page.header }}
+                    {% if page.isFrontpage %}<span class="badge badge-success">Frontpage</span>{% endif %}
+                </td>
                 <td>{{ page.createdAt ? page.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ page.updatedAt ? page.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
@@ -48,6 +54,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('mh_page_page_new') }}">Create new</a>
 {% endblock %}

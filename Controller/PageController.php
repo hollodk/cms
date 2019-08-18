@@ -6,6 +6,7 @@ use Mh\PageBundle\Entity\Page;
 use Mh\PageBundle\Form\PageType;
 use Mh\PageBundle\Repository\PageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,6 +24,33 @@ class PageController extends AbstractController
     {
         return $this->render('@MhPage/page/index.html.twig', [
             'pages' => $pageRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/wizard", name="page_wizard")
+     */
+    public function wizard(Request $request): Response
+    {
+        $attr = [
+            'class' => 'form-control',
+        ];
+
+        $form = $this->createFormBuilder()
+            ->add('photo', null, [
+                'attr' => $attr,
+            ])
+            ->add('type', ChoiceType::class, [
+                'attr' => $attr,
+                'choices' => [
+                    'about-us' => 'About us',
+                ],
+            ])
+            ->getForm()
+            ;
+
+        return $this->render('@MhPage/page/new.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 

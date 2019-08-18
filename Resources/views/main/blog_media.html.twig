@@ -1,0 +1,21 @@
+{% if post.images|length == 1 %}
+{% for image in post.images %}
+<div class="post-image">
+    <a href="{{ path('mh_page_main_post', {'id':post.id}) }}">
+        <img alt="" src="{{ image }}">
+    </a>
+</div>
+{% endfor %}
+
+{% elseif post.images|length > 1 %}
+<div class="post-slider">
+    <div class="carousel dots-inside arrows-visible arrows-only" data-items="1" data-loop="true" data-autoplay="true" data-lightbox="gallery">
+        {% for image in post.images %}
+        <a href="{{ image }}" data-lightbox="gallery-image">
+            <img alt="" src="{{ image }}">
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+

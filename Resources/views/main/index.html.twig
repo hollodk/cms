@@ -1,40 +1,5 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-{% include "@MhPage/main/page_title.html.twig" %}
-
-<section id="page-content">
-    <div class="container">
-        {% set sidebar = config.sidebar %}
-
-        {% if (sidebar.left is defined and sidebar.left == true) or (sidebar.right is defined and sidebar.right == true) %}
-        <div class="row">
-            {% if sidebar.left is defined and sidebar.left == true and sidebar.right is defined and sidebar.right == true %}
-            {% set col = 6 %}
-            {% else %}
-            {% set col = 9 %}
-            {% endif %}
-
-            {% if sidebar.right is defined and sidebar.right == true %}
-            <div class="sidebar col-lg-3 {% if sidebar.modern is defined and sidebar.modern == true %}sidebar-modern{% endif %}">
-                {% block sidebar_right %}sidebar right{% endblock %}
-            </div>
-            {% endif %}
-
-            <div class="content col-lg-{{ col }}">
-                {{ content|raw }}
-            </div>
-
-            {% if sidebar.left is defined and sidebar.left == true %}
-            <div class="sidebar col-lg-3 {% if sidebar.modern is defined and sidebar.modern == true %}sidebar-modern{% endif %}">
-                {% block sidebar_left %}sidebar left{% endblock %}
-            </div>
-            {% endif %}
-        </div>
-
-        {% else %}
-        {{ content|raw }}
-        {% endif %}
-    </div>
-</section>
+{{ content|raw }}
 {% endblock %}

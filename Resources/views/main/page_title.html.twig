@@ -31,6 +31,7 @@
 {% set fade = 'data-animate="fadeInUp" data-animate-delay="1300"' %}
 {% endif %}
 
+{% if page is defined %}
 <section id="page-title" class="{{ text }}{{ position }}" style="{{ style }}">
     <div class="container">
         {% if ptc.breadcrumb is defined and ptc.breadcrumb == true %}
@@ -49,4 +50,4 @@
         </div>
     </div>
 </section>
-
+{% endif %}

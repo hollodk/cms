@@ -1,0 +1,20 @@
+<div id="blog" class="grid-layout post-3-columns m-b-30 grid-loaded" data-item="post-item" style="margin: 0px -20px -20px 0px; position: relative; height: 1615.2px;">
+    {% for post in posts %}
+    <div class="post-item border" style="padding: 0px 20px 20px 0px; position: absolute; left: 0px; top: 0px;">
+        <div class="post-item-wrap">
+
+            {% include "@MhPage/main/blog_media.html.twig" %}
+
+            <div class="post-item-description">
+                <span class="post-meta-date"><i class="fa fa-calendar-o"></i>{{ post.createdAt|date('M j, Y') }}</span>
+                <span class="post-meta-comments"><a href=""><i class="fa fa-comments-o"></i>0 Comments</a></span>
+                <h2>
+                    <a href="{{ path('mh_page_main_post', {'id':post.id}) }}">{{ post.title }}</a>
+                </h2>
+                <p>{{ post.content|striptags|slice(0, slice) }} ...</p>
+                <a href="#" class="item-link">Read More <i class="fa fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
