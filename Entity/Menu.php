@@ -39,6 +39,12 @@ class Menu
      */
     private $menuItems;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Mh\PageBundle\Entity\Site", inversedBy="menus")
+     */
+    private $site;
+
+
     public function __toString()
     {
         return $this->getTitle();
@@ -48,7 +54,6 @@ class Menu
     {
         $this->menuItems = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -135,6 +140,18 @@ class Menu
                 $menuItem->setMenu(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSite(): ?Site
+    {
+        return $this->site;
+    }
+
+    public function setSite(?Site $site): self
+    {
+        $this->site = $site;
 
         return $this;
     }

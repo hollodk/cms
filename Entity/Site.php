@@ -44,6 +44,11 @@ class Site
      */
     private $pages;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Mh\PageBundle\Entity\Menu", mappedBy="site")
+     */
+    private $menus;
+
 
     public function __toString()
     {
@@ -53,6 +58,7 @@ class Site
     public function __construct()
     {
         $this->pages = new ArrayCollection();
+        $this->menus = new ArrayCollection();
     }
 
 
@@ -151,6 +157,37 @@ class Site
             // set the owning side to null (unless already changed)
             if ($page->getSite() === $this) {
                 $page->setSite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Menu[]
+     */
+    public function getMenus(): Collection
+    {
+        return $this->menus;
+    }
+
+    public function addMenu(Menu $menu): self
+    {
+        if (!$this->menus->contains($menu)) {
+            $this->menus[] = $menu;
+            $menu->setSite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMenu(Menu $menu): self
+    {
+        if ($this->menus->contains($menu)) {
+            $this->menus->removeElement($menu);
+            // set the owning side to null (unless already changed)
+            if ($menu->getSite() === $this) {
+                $menu->setSite(null);
             }
         }
 

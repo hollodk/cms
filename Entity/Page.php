@@ -47,7 +47,7 @@ class Page
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isFrontpage;
+    private $isFrontpage = false;
 
     /**
      * @ORM\OneToMany(targetEntity="Mh\PageBundle\Entity\MenuItem", mappedBy="page")

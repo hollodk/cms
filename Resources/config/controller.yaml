@@ -3,8 +3,12 @@ services:
         resource: '../../Controller'
         tags: ['controller.service_arguments']
 
+    Mh\PageBundle\Helper\:
+        resource: '../../Helper'
+        public: true
+        arguments: ['@doctrine.orm.default_entity_manager']
+
     Mh\PageBundle\Repository\:
         resource: '../../Repository'
         tags: ['doctrine.repository_service']
         arguments: ['@doctrine']
-

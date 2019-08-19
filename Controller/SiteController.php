@@ -26,6 +26,33 @@ class SiteController extends AbstractController
     }
 
     /**
+     * @Route("/manage", name="site_manage")
+     */
+    public function manage(Request $request): Response
+    {
+        return $this->render('@MhPage/site/manage.html.twig');
+    }
+
+    /**
+     * @Route("/install", name="site_install")
+     */
+    public function install(Request $request): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $sites = $em->getRepository('Mh\PageBundle:Site')->findAll();
+
+        if (count($sites) > 0) {
+            throw new \Exception('You cannot install on top of an existing system');
+        }
+
+        $helper = $this->get('Mh\PageBundle\Helper\SiteHelper');
+        $helper->installSite();
+
+        return $this->redirectToRoute('mh_page_main');
+    }
+
+    /**
      * @Route("/new", name="site_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
