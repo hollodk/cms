@@ -18,9 +18,9 @@ doctrine:
     orm:
         mappings:
             MhPageBundle:
-                is_bundle: false
+                is_bundle: true
                 type: annotation
-                dir: '%kernel.project_dir%/vendor/mh/page-bundle/Entity'
+                dir: 'Entity'
                 prefix: 'Mh\PageBundle\Entity'
                 alias: Mh\PageBundle
 
