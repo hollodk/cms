@@ -25,7 +25,7 @@ class PageType extends AbstractType
             ->add('isFrontpage')
             ->add('site', EntityType::class, [
                 'attr' => $attr,
-                'class' => 'Mh\PageBundle:Site',
+                'class' => 'MhPageBundle:Site',
             ])
             ->add('header', null, $opt)
             ->add('content', TextareaType::class, [

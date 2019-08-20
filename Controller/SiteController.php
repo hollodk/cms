@@ -38,14 +38,6 @@ class SiteController extends AbstractController
      */
     public function install(Request $request): Response
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $sites = $em->getRepository('Mh\PageBundle:Site')->findAll();
-
-        if (count($sites) > 0) {
-            throw new \Exception('You cannot install on top of an existing system');
-        }
-
         $helper = $this->get('Mh\PageBundle\Helper\SiteHelper');
         $helper->installSite();
 

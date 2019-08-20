@@ -25,11 +25,11 @@ class MenuItemType extends AbstractType
             ->add('priority', null, $opt)
             ->add('menu', EntityType::class, [
                 'attr' => $attr,
-                'class' => 'Mh\PageBundle:Menu',
+                'class' => 'MhPageBundle:Menu',
             ])
             ->add('page', EntityType::class, [
                 'attr' => $attr,
-                'class' => 'Mh\PageBundle:Page',
+                'class' => 'MhPageBundle:Page',
             ])
         ;
     }

@@ -38,7 +38,7 @@ class PostType extends AbstractType
                 ],
             ])
             ->add('tags', EntityType::class, [
-                'class' => 'Mh\PageBundle:Tag',
+                'class' => 'MhPageBundle:Tag',
                 'multiple' => true,
                 'attr' => [
                     'size' => 5,

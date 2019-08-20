@@ -18,6 +18,11 @@ class SiteHelper
 
     public function installSite()
     {
+        $sites = $this->em->getRepository('MhPageBundle:Site')->findAll();
+        if (count($sites) > 0) {
+            throw new \Exception('You cannot install on top of an existing system');
+        }
+
         $attr = $this->getDefaultAttribute();
 
         $site = new Site();

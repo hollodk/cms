@@ -18,7 +18,7 @@ class MainController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $page = $em->getRepository('Mh\PageBundle:Page')->findOneByIsFrontpage(true);
+        $page = $em->getRepository('MhPageBundle:Page')->findOneByIsFrontpage(true);
         if (!$page) {
             $this->addFlash('error', 'No frontpage found, you need to configure the system');
 
@@ -40,8 +40,8 @@ class MainController extends AbstractController
         $params['config'] = json_decode($params['site']->getAttribute(), true);
         $params['post'] = $post;
 
-        $params['next'] = $em->getRepository('Mh\PageBundle:Post')->getNext($post);
-        $params['prev'] = $em->getRepository('Mh\PageBundle:Post')->getPrev($post);
+        $params['next'] = $em->getRepository('MhPageBundle:Post')->getNext($post);
+        $params['prev'] = $em->getRepository('MhPageBundle:Post')->getPrev($post);
 
         return $this->render('main/post.html.twig', $params);
     }
@@ -65,7 +65,7 @@ class MainController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $menuItem = $em->getRepository('Mh\PageBundle:MenuItem')->findOneBySlug($request->get('page'));
+        $menuItem = $em->getRepository('MhPageBundle:MenuItem')->findOneBySlug($request->get('page'));
         if (!$menuItem) {
             throw new \Exception('page not found');
         }
@@ -96,7 +96,7 @@ class MainController extends AbstractController
 
         $params['site'] = $this->getSite();
         $params['menu'] = $this->getMenu();
-        $params['menu_items'] = $em->getRepository('Mh\PageBundle:MenuItem')->findBy(
+        $params['menu_items'] = $em->getRepository('MhPageBundle:MenuItem')->findBy(
             ['menu' => $params['menu']],
             ['priority' => 'ASC']
         );
@@ -122,7 +122,7 @@ class MainController extends AbstractController
         $html = preg_replace_callback(
             '/__page:(.*)__/',
             function($input) use ($container, $em, $request) {
-                $page = $em->getRepository('Mh\PageBundle:Page')->findOneByHeader($input[1]);
+                $page = $em->getRepository('MhPageBundle:Page')->findOneByHeader($input[1]);
 
                 $method = 'headerless';
                 $controller = $container->get('Mh\PageBundle\Controller\MainController');
@@ -161,7 +161,7 @@ class MainController extends AbstractController
             function($input) use ($em, $twig) {
                 $limit = $input[1];
 
-                $posts = $em->getRepository('Mh\PageBundle:Post')->findBy(
+                $posts = $em->getRepository('MhPageBundle:Post')->findBy(
                     [],
                     ['id' => 'DESC'],
                     $limit
@@ -181,7 +181,7 @@ class MainController extends AbstractController
     private function getSite()
     {
         $em = $this->getDoctrine()->getManager();
-        $site = $em->getRepository('Mh\PageBundle:Site')->findOneBy(
+        $site = $em->getRepository('MhPageBundle:Site')->findOneBy(
             [],
             ['id' => 'DESC']
         );
@@ -192,7 +192,7 @@ class MainController extends AbstractController
     private function getMenu()
     {
         $em = $this->getDoctrine()->getManager();
-        $menu = $em->getRepository('Mh\PageBundle:Menu')->findOneBy(
+        $menu = $em->getRepository('MhPageBundle:Menu')->findOneBy(
             [],
             ['id' => 'DESC']
         );

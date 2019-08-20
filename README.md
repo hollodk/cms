@@ -22,7 +22,7 @@ doctrine:
                 type: annotation
                 dir: 'Entity'
                 prefix: 'Mh\PageBundle\Entity'
-                alias: Mh\PageBundle
+                alias: 'MhPageBundle'
 
 
 ### template base.html.twig
@@ -33,11 +33,6 @@ doctrine:
 ### template layout.html.twig
 
 {% extends "@MhPage/layout.html.twig" %}
-
-
-#### Post work
-
-Remember to run ./bin/console assets:install --symlink
 
 
 ##### DEV VERSION
@@ -79,5 +74,4 @@ doctrine:
                 type: annotation
                 dir: '%kernel.project_dir%/vendor/mh/page-bundle/Entity'
                 prefix: 'Mh\PageBundle\Entity'
-                alias: Mh\PageBundle
-
+                alias: 'MhPageBundle'
