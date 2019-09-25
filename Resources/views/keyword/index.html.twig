@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Keyword index{% endblock %}
+
+{% block body %}
+    <h1>Keyword index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for keyword in keywords %}
+            <tr>
+                <td>{{ keyword.id }}</td>
+                <td>{{ keyword.title }}</td>
+                <td>{{ keyword.content }}</td>
+                <td>{{ keyword.createdAt ? keyword.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ keyword.updatedAt ? keyword.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('mh_page_keyword_show', {'id': keyword.id}) }}">show</a>
+                    <a href="{{ path('mh_page_keyword_edit', {'id': keyword.id}) }}">edit</a>
+                    <a href="{{ path('mh_page_wildcard', {'page': keyword.slug}) }}">visit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('mh_page_keyword_new') }}">Create new</a>
+{% endblock %}

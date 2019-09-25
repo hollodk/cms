@@ -71,13 +71,25 @@ class MainController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
         $menuItem = $em->getRepository('MhPageBundle:MenuItem')->findOneBySlug($request->get('page'));
+
         if (!$menuItem) {
-            throw new \Exception('page not found');
+            $keyword = $em->getRepository('MhPageBundle:Keyword')->findOneBySlug($request->get('page'));
+            if (!$keyword) {
+                throw new \Exception('page not found');
+            }
+
+            $page = $em->getRepository('MhPageBundle:Page')->findOneByHeader('Keyword');
+            $page->setHeader($keyword->getTitle());
+
+        } else {
+            $page = $menuItem->getPage();
         }
 
-        $page = $menuItem->getPage();
-
         $params = $siteHelper->build($request, $page);
+
+        if (isset($keyword)) {
+            $params['keyword'] = $keyword;
+        }
 
         return $this->render('@MhPage/main/index.html.twig', $params);
     }

@@ -54,6 +54,11 @@ class SiteHelper
             'name' => 'Tag',
         ];
 
+        $this->list[65] = [
+            'url' => 'mh_page_keyword_index',
+            'name' => 'Keyword',
+        ];
+
         $this->list[70] = [
             'url' => 'mh_page_site_manage',
             'name' => 'Manage site',
