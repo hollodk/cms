@@ -4,6 +4,7 @@ namespace Mh\PageBundle\Controller;
 
 use Mh\PageBundle\Entity\Page;
 use Mh\PageBundle\Entity\Post;
+use Mh\PageBundle\Helper\SiteHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +15,7 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="main")
      */
-    public function index(Request $request)
+    public function index(Request $request, SiteHelper $siteHelper)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -25,17 +26,19 @@ class MainController extends AbstractController
             return $this->redirectToRoute('mh_page_admin');
         }
 
-        return $this->build($request, $page);
+        $params = $siteHelper->build($request, $page);
+
+        return $this->render('@MhPage/main/index.html.twig', $params);
     }
 
     /**
      * @Route("/post-{id}")
      */
-    public function post(Post $post)
+    public function post(Post $post, SiteHelper $siteHelper)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $params = $this->getDefaults();
+        $params = $siteHelper->getDefaults();
 
         $params['config'] = json_decode($params['site']->getAttribute(), true);
         $params['post'] = $post;
@@ -49,19 +52,21 @@ class MainController extends AbstractController
     /**
      * @Route("/play/page-{id}", name="main_play")
      */
-    public function play(Request $request, Page $page)
+    public function play(Request $request, Page $page, SiteHelper $siteHelper)
     {
-        return $this->build($request, $page);
+        $params = $siteHelper->build($request, $page);
+
+        return $this->render('@MhPage/main/index.html.twig', $params);
     }
 
-    public function headerless(Request $request, Page $page)
+    public function headerless(Request $request, Page $page, SiteHelper $siteHelper)
     {
-        $html = $this->process($request, $page->getContent());
+        $html = $siteHelper->process($request, $page->getContent());
 
         return new Response($html);
     }
 
-    public function page(Request $request)
+    public function page(Request $request, SiteHelper $siteHelper)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -72,131 +77,8 @@ class MainController extends AbstractController
 
         $page = $menuItem->getPage();
 
-        return $this->build($request, $page);
-    }
-
-    private function build(Request $request, Page $page)
-    {
-        $params = $this->getDefaults();
-
-        $html = $this->process($request, $page->getContent());
-
-        $params['page'] = $page;
-        $params['content'] = $html;
-        $params['page'] = $page;
-        $params['config'] = $page->getPageConfig();
+        $params = $siteHelper->build($request, $page);
 
         return $this->render('@MhPage/main/index.html.twig', $params);
-    }
-
-    private function getDefaults()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $params = [];
-
-        $params['site'] = $this->getSite();
-        $params['menu'] = $this->getMenu();
-        $params['menu_items'] = $em->getRepository('MhPageBundle:MenuItem')->findBy(
-            ['menu' => $params['menu']],
-            ['priority' => 'ASC']
-        );
-
-        return $params;
-    }
-
-    private function process(Request $request, $html)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $twig = $this->get('twig');
-
-        $html = preg_replace_callback(
-            '/__template:(.*)__/',
-            function($input) use ($twig) {
-                return $twig->render($input[1]);
-            },
-            $html
-        );
-
-        $container = $this->container;
-
-        $html = preg_replace_callback(
-            '/__page:(.*)__/',
-            function($input) use ($container, $em, $request) {
-                $page = $em->getRepository('MhPageBundle:Page')->findOneByHeader($input[1]);
-
-                $method = 'headerless';
-                $controller = $container->get('Mh\PageBundle\Controller\MainController');
-
-                return $controller->$method($request, $page)->getContent();
-            },
-            $html
-        );
-
-
-        $html = preg_replace_callback(
-            '/__render:(.*)__/',
-            function($input) use ($container) {
-                try {
-                    $o = preg_split("/::/", $input[1]);
-                    $method = $o[1];
-
-                    $controller = $container->get($o[0]);
-
-                    if (!method_exists($controller, $method)) {
-                        throw new \Exception('Method does not exist');
-                    }
-
-                    return $controller->$method()->getContent();
-
-                } catch (\Exception $e) {
-                    return 'Error occur while render: '.$input[1];
-                }
-
-            },
-            $html
-        );
-
-        $html = preg_replace_callback(
-            '/__blog_latest:(\d+)__/',
-            function($input) use ($em, $twig) {
-                $limit = $input[1];
-
-                $posts = $em->getRepository('MhPageBundle:Post')->findBy(
-                    [],
-                    ['id' => 'DESC'],
-                    $limit
-                );
-
-                return $twig->render('main/blog.html.twig', [
-                    'posts' => $posts,
-                    'slice' => 200,
-                ]);
-            },
-            $html
-        );
-
-        return $html;
-    }
-
-    private function getSite()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $site = $em->getRepository('MhPageBundle:Site')->findOneBy(
-            [],
-            ['id' => 'DESC']
-        );
-
-        return $site;
-    }
-
-    private function getMenu()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $menu = $em->getRepository('MhPageBundle:Menu')->findOneBy(
-            [],
-            ['id' => 'DESC']
-        );
-
-        return $menu;
     }
 }

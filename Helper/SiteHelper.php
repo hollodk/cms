@@ -6,14 +6,139 @@ use Mh\PageBundle\Entity\Menu;
 use Mh\PageBundle\Entity\MenuItem;
 use Mh\PageBundle\Entity\Page;
 use Mh\PageBundle\Entity\Site;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class SiteHelper
 {
     private $em;
+    private $container;
 
-    public function __construct(\Doctrine\ORM\EntityManager $em)
+    public function __construct(ContainerInterface $container)
     {
-        $this->em = $em;
+        $this->em = $container->get('doctrine.orm.default_entity_manager');
+        $this->container = $container;
+    }
+
+    public function getDefaults()
+    {
+        $params = [];
+
+        $params['site'] = $this->getSite();
+        $params['menu'] = $this->getMenu();
+        $params['menu_items'] = $this->em->getRepository('MhPageBundle:MenuItem')->findBy(
+            ['menu' => $params['menu']],
+            ['priority' => 'ASC']
+        );
+
+        return $params;
+    }
+
+    private function getSite()
+    {
+        $site = $this->em->getRepository('MhPageBundle:Site')->findOneBy(
+            [],
+            ['id' => 'DESC']
+        );
+
+        return $site;
+    }
+
+    private function getMenu()
+    {
+        $menu = $this->em->getRepository('MhPageBundle:Menu')->findOneBy(
+            [],
+            ['id' => 'DESC']
+        );
+
+        return $menu;
+    }
+
+    public function build(Request $request, Page $page)
+    {
+        $params = $this->getDefaults();
+
+        $html = $this->process($request, $page->getContent());
+
+        $params['page'] = $page;
+        $params['content'] = $html;
+        $params['page'] = $page;
+        $params['config'] = $page->getPageConfig();
+
+        return $params;
+    }
+
+    public function process(Request $request, $html)
+    {
+        $em = $this->em;
+        $twig = $this->container->get('twig');
+
+        $html = preg_replace_callback(
+            '/__template:(.*)__/',
+            function($input) use ($twig) {
+                return $twig->render($input[1]);
+            },
+            $html
+        );
+
+        $container = $this->container;
+
+        $html = preg_replace_callback(
+            '/__page:(.*)__/',
+            function($input) use ($container, $em, $request) {
+                $page = $em->getRepository('MhPageBundle:Page')->findOneByHeader($input[1]);
+
+                $method = 'headerless';
+                $controller = $container->get('Mh\PageBundle\Controller\MainController');
+
+                return $controller->$method($request, $page)->getContent();
+            },
+            $html
+        );
+
+        $html = preg_replace_callback(
+            '/__render:(.*)__/',
+            function($input) use ($container) {
+                try {
+                    $o = preg_split("/::/", $input[1]);
+                    $method = $o[1];
+
+                    $controller = $container->get($o[0]);
+
+                    if (!method_exists($controller, $method)) {
+                        throw new \Exception('Method does not exist, controller: '.$o[1].', method: '.$method);
+                    }
+
+                    return $controller->$method()->getContent();
+
+                } catch (\Exception $e) {
+                    return 'Error occur while render: '.$input[1].', error: '.$e->getMessage();
+                }
+
+            },
+            $html
+        );
+
+        $html = preg_replace_callback(
+            '/__blog_latest:(\d+)__/',
+            function($input) use ($em, $twig) {
+                $limit = $input[1];
+
+                $posts = $em->getRepository('MhPageBundle:Post')->findBy(
+                    [],
+                    ['id' => 'DESC'],
+                    $limit
+                );
+
+                return $twig->render('main/blog.html.twig', [
+                    'posts' => $posts,
+                    'slice' => 200,
+                ]);
+            },
+            $html
+        );
+
+        return $html;
     }
 
     public function installSite()
