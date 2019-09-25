@@ -24,51 +24,55 @@ class SiteHelper
 
     private function setAdminItems()
     {
-        $this->list[1] = [
+        $this->list[10] = [
             'url' => 'mh_page_site_index',
             'name' => 'Site',
         ];
 
-        $this->list[2] = [
+        $this->list[20] = [
             'url' => 'mh_page_menu_index',
             'name' => 'Menu',
         ];
 
-        $this->list[3] = [
+        $this->list[30] = [
             'url' => 'mh_page_menu_item_index',
             'name' => 'Menu Items',
         ];
 
-        $this->list[4] = [
+        $this->list[40] = [
             'url' => 'mh_page_page_index',
             'name' => 'Page',
         ];
 
-        $this->list[5] = [
+        $this->list[50] = [
             'url' => 'mh_page_post_index',
             'name' => 'Post',
         ];
 
-        $this->list[6] = [
+        $this->list[60] = [
             'url' => 'mh_page_tag_index',
             'name' => 'Tag',
         ];
 
-        $this->list[7] = [
+        $this->list[70] = [
             'url' => 'mh_page_site_manage',
             'name' => 'Manage site',
         ];
 
-        $this->list[8] = [
+        $this->list[80] = [
             'url' => 'mh_page_main',
             'target' => '_open',
             'name' => 'Frontpage',
         ];
     }
 
-    public function addAdminItem($item)
+    public function addAdminItem($item, $key=null)
     {
-        $this->list[] = $item;
+        if ($key) {
+            $this->list[$key] = $item;
+        } else {
+            $this->list[] = $item;
+        }
     }
 
     public function getAdminList()
