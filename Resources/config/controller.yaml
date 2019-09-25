@@ -6,7 +6,7 @@ services:
     Mh\PageBundle\Helper\:
         resource: '../../Helper'
         public: true
-        arguments: ['@doctrine.orm.default_entity_manager']
+        arguments: ['@service_container']
 
     Mh\PageBundle\Repository\:
         resource: '../../Repository'
