@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/keyword")
+ * @Route("/admin/keyword")
  */
 class KeywordController extends AbstractController
 {
@@ -21,7 +21,7 @@ class KeywordController extends AbstractController
      */
     public function index(KeywordRepository $keywordRepository): Response
     {
-        return $this->render('keyword/index.html.twig', [
+        return $this->render('@MhPage/keyword/index.html.twig', [
             'keywords' => $keywordRepository->findAll(),
         ]);
     }
@@ -37,7 +37,7 @@ class KeywordController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $slug = new Slugify();
-            $keyword->setSlug($slug->slugify($keyword->getKeyword()));
+            $keyword->setSlug($slug->slugify($keyword->getTitle()));
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($keyword);
@@ -46,7 +46,7 @@ class KeywordController extends AbstractController
             return $this->redirectToRoute('mh_page_keyword_index');
         }
 
-        return $this->render('keyword/new.html.twig', [
+        return $this->render('@MhPage/keyword/new.html.twig', [
             'keyword' => $keyword,
             'form' => $form->createView(),
         ]);
@@ -57,7 +57,7 @@ class KeywordController extends AbstractController
      */
     public function show(Keyword $keyword): Response
     {
-        return $this->render('keyword/show.html.twig', [
+        return $this->render('@MhPage/keyword/show.html.twig', [
             'keyword' => $keyword,
         ]);
     }
@@ -72,14 +72,14 @@ class KeywordController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $slug = new Slugify();
-            $keyword->setSlug($slug->slugify($keyword->getKeyword()));
+            $keyword->setSlug($slug->slugify($keyword->getTitle()));
 
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('mh_page_keyword_index');
         }
 
-        return $this->render('keyword/edit.html.twig', [
+        return $this->render('@MhPage/keyword/edit.html.twig', [
             'keyword' => $keyword,
             'form' => $form->createView(),
         ]);

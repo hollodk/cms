@@ -241,6 +241,12 @@ class SiteHelper
         $this->em->persist($page);
 
         $page = new Page();
+        $page->setHeader('Keyword');
+        $page->setSite($site);
+
+        $this->em->persist($page);
+
+        $page = new Page();
         $page->setHeader('About us');
         $page->setSite($site);
 
