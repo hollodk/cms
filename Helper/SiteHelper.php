@@ -14,10 +14,70 @@ class SiteHelper
     private $em;
     private $container;
 
+    private $list = [];
+
     public function __construct(ContainerInterface $container)
     {
         $this->em = $container->get('doctrine.orm.default_entity_manager');
         $this->container = $container;
+    }
+
+    private function setAdminItems()
+    {
+        $this->list[1] = [
+            'url' => 'mh_page_site_index',
+            'name' => 'Site',
+        ];
+
+        $this->list[2] = [
+            'url' => 'mh_page_menu_index',
+            'name' => 'Menu',
+        ];
+
+        $this->list[3] = [
+            'url' => 'mh_page_menu_item_index',
+            'name' => 'Menu Items',
+        ];
+
+        $this->list[4] = [
+            'url' => 'mh_page_page_index',
+            'name' => 'Page',
+        ];
+
+        $this->list[5] = [
+            'url' => 'mh_page_post_index',
+            'name' => 'Post',
+        ];
+
+        $this->list[6] = [
+            'url' => 'mh_page_tag_index',
+            'name' => 'Tag',
+        ];
+
+        $this->list[7] = [
+            'url' => 'mh_page_site_manage',
+            'name' => 'Manage site',
+        ];
+
+        $this->list[8] = [
+            'url' => 'mh_page_main',
+            'target' => '_open',
+            'name' => 'Frontpage',
+        ];
+    }
+
+    public function addAdminItem($item)
+    {
+        $this->list[] = $item;
+    }
+
+    public function getAdminList()
+    {
+        $this->setAdminItems();
+
+        ksort($this->list);
+
+        return $this->list;
     }
 
     public function getDefaults()
@@ -30,6 +90,7 @@ class SiteHelper
             ['menu' => $params['menu']],
             ['priority' => 'ASC']
         );
+        $params['admin_menu'] = $this->getAdminList();
 
         return $params;
     }
@@ -64,6 +125,7 @@ class SiteHelper
         $params['content'] = $html;
         $params['page'] = $page;
         $params['config'] = $page->getPageConfig();
+        $params['admin_menu'] = $this->getAdminList();
 
         return $params;
     }
