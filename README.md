@@ -72,6 +72,6 @@ doctrine:
             MhPageBundle:
                 is_bundle: false
                 type: annotation
-                dir: '%kernel.project_dir%/vendor/mh/page-bundle/Entity'
+                dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'Mh\PageBundle\Entity'
                 alias: 'MhPageBundle'

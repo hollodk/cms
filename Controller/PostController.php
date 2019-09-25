@@ -26,7 +26,7 @@ class PostController extends AbstractController
             100
         );
 
-        return $this->render('post/index.html.twig', [
+        return $this->render('@MhPage/post/index.html.twig', [
             'posts' => $posts,
         ]);
     }
@@ -59,10 +59,10 @@ EOF;
             $entityManager->persist($post);
             $entityManager->flush();
 
-            return $this->redirectToRoute('post_index');
+            return $this->redirectToRoute('mh_page_post_index');
         }
 
-        return $this->render('post/new.html.twig', [
+        return $this->render('@MhPage/post/new.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
         ]);
@@ -73,7 +73,7 @@ EOF;
      */
     public function show(Post $post): Response
     {
-        return $this->render('post/show.html.twig', [
+        return $this->render('@MhPage/post/show.html.twig', [
             'post' => $post,
         ]);
     }
@@ -89,10 +89,10 @@ EOF;
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('post_index');
+            return $this->redirectToRoute('mh_page_post_index');
         }
 
-        return $this->render('post/edit.html.twig', [
+        return $this->render('@MhPage/post/edit.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
         ]);
@@ -109,6 +109,6 @@ EOF;
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('post_index');
+        return $this->redirectToRoute('mh_page_post_index');
     }
 }

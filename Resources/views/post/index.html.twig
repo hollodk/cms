@@ -5,8 +5,8 @@
 {% block body %}
     <h1>Post index</h1>
 
-    <a class="btn btn-primary" href="{{ path('post_new') }}">Create new</a>
-    <a class="btn btn-primary" href="{{ path('post_new', {'sample':true}) }}">Create sample</a>
+    <a class="btn btn-primary" href="{{ path('mh_page_post_new') }}">Create new</a>
+    <a class="btn btn-primary" href="{{ path('mh_page_post_new', {'sample':true}) }}">Create sample</a>
 
     <table class="table">
         <thead>
@@ -30,8 +30,8 @@
                 <td>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a class="btn btn-sm btn-primary" href="{{ path('post_show', {'id': post.id}) }}">show</a>
-                    <a class="btn btn-sm btn-primary" href="{{ path('post_edit', {'id': post.id}) }}">edit</a>
+                    <a class="btn btn-sm btn-primary" href="{{ path('mh_page_post_show', {'id': post.id}) }}">show</a>
+                    <a class="btn btn-sm btn-primary" href="{{ path('mh_page_post_edit', {'id': post.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
