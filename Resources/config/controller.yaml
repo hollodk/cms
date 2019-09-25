@@ -3,10 +3,16 @@ services:
         resource: '../../Controller'
         tags: ['controller.service_arguments']
 
+    Mh\PageBundle\Command\:
+        resource: '../../Command'
+        public: true
+        tags: ['console.command']
+        arguments: ['@service_container', '@logger']
+
     Mh\PageBundle\Helper\:
         resource: '../../Helper'
         public: true
-        arguments: ['@service_container']
+        arguments: ['@service_container', '@logger']
 
     Mh\PageBundle\Repository\:
         resource: '../../Repository'

@@ -2,6 +2,7 @@
 
 namespace Mh\PageBundle\Controller;
 
+use Cocur\Slugify\Slugify;
 use Mh\PageBundle\Entity\Post;
 use Mh\PageBundle\Form\PostType;
 use Mh\PageBundle\Repository\PostRepository;
@@ -55,6 +56,9 @@ EOF;
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = new Slugify();
+            $post->setSlug($slug->slugify($post->getTitle()));
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($post);
             $entityManager->flush();
@@ -87,6 +91,9 @@ EOF;
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = new Slugify();
+            $post->setSlug($slug->slugify($post->getTitle()));
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('mh_page_post_index');

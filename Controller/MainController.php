@@ -32,9 +32,9 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/post-{id}")
+     * @Route("/post/{id}-{slug}", name="main_post")
      */
-    public function post(Post $post, SiteHelper $siteHelper)
+    public function post(Post $post, SiteHelper $siteHelper, $slug)
     {
         $em = $this->getDoctrine()->getManager();
 
