@@ -103,7 +103,7 @@ class SitemapHelper
                 $key
             );
 
-            $body = $twig->render('sitemap/sitemap.xml.twig', [
+            $body = $twig->render('@MhPage/sitemap/sitemap.xml.twig', [
                 'urls' => $chunk,
                 'hostname' => $hostname
             ]);
@@ -112,7 +112,7 @@ class SitemapHelper
             file_put_contents($filename, $body);
         }
 
-        $body = $twig->render('sitemap/sitemap-index.xml.twig', [
+        $body = $twig->render('@MhPage/sitemap/sitemap-index.xml.twig', [
             'files' => $files,
             'hostname' => $hostname
         ]);

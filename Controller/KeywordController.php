@@ -21,8 +21,14 @@ class KeywordController extends AbstractController
      */
     public function index(KeywordRepository $keywordRepository): Response
     {
+        $keywords = $keywordRepository->findBy(
+            [],
+            ['title' => 'ASC'],
+            200
+        );
+
         return $this->render('@MhPage/keyword/index.html.twig', [
-            'keywords' => $keywordRepository->findAll(),
+            'keywords' => $keywords,
         ]);
     }
 
