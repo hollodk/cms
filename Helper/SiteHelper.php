@@ -64,9 +64,14 @@ class SiteHelper
             'name' => 'Manage site',
         ];
 
+        $this->list[75] = [
+            'url' => 'mh_page_user_index',
+            'name' => 'User',
+        ];
+
         $this->list[80] = [
             'url' => 'mh_page_main',
-            'target' => '_open',
+            'target' => '_blank',
             'name' => 'Frontpage',
         ];
     }
