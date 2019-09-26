@@ -58,7 +58,7 @@ class SiteController extends AbstractController
             $entityManager->persist($site);
             $entityManager->flush();
 
-            return $this->redirectToRoute('site_index');
+            return $this->redirectToRoute('mh_page_site_index');
         }
 
         return $this->render('@MhPage/site/new.html.twig', [
@@ -88,7 +88,7 @@ class SiteController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('site_index');
+            return $this->redirectToRoute('mh_page_site_index');
         }
 
         return $this->render('@MhPage/site/edit.html.twig', [
@@ -108,6 +108,6 @@ class SiteController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('site_index');
+        return $this->redirectToRoute('mh_page_site_index');
     }
 }
