@@ -69,6 +69,11 @@ class SiteHelper
             'name' => 'User',
         ];
 
+        $this->list[78] = [
+            'url' => 'mh_page_app_logout',
+            'name' => 'Logout',
+        ];
+
         $this->list[80] = [
             'url' => 'mh_page_main',
             'target' => '_blank',
