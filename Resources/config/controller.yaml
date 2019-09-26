@@ -18,3 +18,7 @@ services:
         resource: '../../Repository'
         tags: ['doctrine.repository_service']
         arguments: ['@doctrine']
+
+    Mh\PageBundle\Security\:
+        resource: '../../Security'
+        arguments: ['@doctrine.orm.default_entity_manager', '@router.default', '@security.csrf.token_manager', '@security.user_password_encoder.generic']
