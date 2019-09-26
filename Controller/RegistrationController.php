@@ -32,6 +32,11 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $bytes = random_bytes(5);
+            $key = bin2hex($bytes);
+
+            $user->setKeyPublic($key);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
