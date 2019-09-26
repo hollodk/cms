@@ -25,7 +25,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="simple_array")
+     * @ORM\Column(type="simple_array", nullable=true)
      */
     private $roles = [];
 

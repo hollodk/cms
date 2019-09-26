@@ -28,7 +28,7 @@ security:
                 authenticators:
                     - Mh\PageBundle\Security\AppCustomAuthenticator
             logout:
-                path: app_logout
+                path: mh_page_app_logout
                 # where to redirect after logout
                 # target: app_any_route
 

@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ReadmeController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/", name="readme_index")
      */
     public function index()
     {

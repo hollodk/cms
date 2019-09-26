@@ -38,7 +38,7 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
 
     public function supports(Request $request)
     {
-        return 'app_login' === $request->attributes->get('_route')
+        return 'mh_page_app_login' === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
 
@@ -91,6 +91,6 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
 
     protected function getLoginUrl()
     {
-        return $this->urlGenerator->generate('app_login');
+        return $this->urlGenerator->generate('mh_page_app_login');
     }
 }
