@@ -27,46 +27,55 @@ class SiteHelper
         $this->list[10] = [
             'url' => 'mh_page_site_index',
             'name' => 'Site',
+            'admin' => true,
         ];
 
         $this->list[20] = [
             'url' => 'mh_page_menu_index',
             'name' => 'Menu',
+            'admin' => true,
         ];
 
         $this->list[30] = [
             'url' => 'mh_page_menu_item_index',
             'name' => 'Menu Items',
+            'admin' => true,
         ];
 
         $this->list[40] = [
             'url' => 'mh_page_page_index',
             'name' => 'Page',
+            'admin' => true,
         ];
 
         $this->list[50] = [
             'url' => 'mh_page_post_index',
             'name' => 'Post',
+            'admin' => true,
         ];
 
         $this->list[60] = [
             'url' => 'mh_page_tag_index',
             'name' => 'Tag',
+            'admin' => true,
         ];
 
         $this->list[65] = [
             'url' => 'mh_page_keyword_index',
             'name' => 'Keyword',
+            'admin' => true,
         ];
 
         $this->list[70] = [
             'url' => 'mh_page_site_manage',
             'name' => 'Manage site',
+            'admin' => true,
         ];
 
         $this->list[75] = [
             'url' => 'mh_page_user_index',
             'name' => 'User',
+            'admin' => true,
         ];
 
         $this->list[78] = [
@@ -307,6 +316,8 @@ class SiteHelper
         $attr = '
         {
     "show_admin": true,
+    "show_login": false,
+    "show_register": false,
     "show_home": true,
     "description": "Free information about betting tips from the best experienced tipsters. Professional analyze made by our betting experts to help you place your online bets.",
     "author": "Betting Kinds",

@@ -77,6 +77,12 @@
                             <li><a href="{{ path('mh_page_wildcard', {'page':item.slug}) }}">{{ item.title }}</a></li>
                             {% endfor %}
                             {% endif %}
+                            {% if config.show_login is defined and config.show_login == true %}
+                            <li><a href="{{ path('mh_page_app_login') }}">Login</a></li>
+                            {% endif %}
+                            {% if config.show_register is defined and config.show_register == true %}
+                            <li><a href="{{ path('mh_page_app_register') }}">Register</a></li>
+                            {% endif %}
                             {% if config.show_admin is defined and config.show_admin == true %}
                             <li><a href="{{ path('mh_page_admin') }}">Admin</a></li>
                             {% endif %}

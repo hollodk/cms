@@ -7,7 +7,7 @@ services:
         resource: '../../Command'
         public: true
         tags: ['console.command']
-        arguments: ['@service_container', '@logger']
+        arguments: ['@service_container', '@logger', '@security.user_password_encoder.generic']
 
     Mh\PageBundle\Helper\:
         resource: '../../Helper'

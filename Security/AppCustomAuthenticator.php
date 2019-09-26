@@ -38,7 +38,7 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
 
     public function supports(Request $request)
     {
-        return 'mh_page_app_login' === $request->attributes->get('_route')
+        return preg_match("/^app_login|mh_page_app_login$/", $request->attributes->get('_route'))
             && $request->isMethod('POST');
     }
 
@@ -85,8 +85,7 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse($this->urlGenerator->generate('mh_page_dashboard'));
     }
 
     protected function getLoginUrl()
