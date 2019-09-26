@@ -21,7 +21,9 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {% if is_granted('ROLE_ADMIN') %}
                 {{ render(controller('\\Mh\\PageBundle\\Controller\\ElementController::menu')) }}
+                {% endif %}
             </div>
         </nav>
 
