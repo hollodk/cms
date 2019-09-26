@@ -72,6 +72,17 @@
         <script src="{{ asset('bundles/mhpage/js/plugins.js') }}"></script>
         <script src="{{ asset('bundles/mhpage/js/functions.js') }}"></script>
 
+        {% if config.google is defined and config.google %}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-102242943-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ config.google }}');
+        </script>
+        {% endif %}
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>
