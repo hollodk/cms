@@ -1,8 +1,11 @@
-/*
+function copyText(element) {
+    var copyText = document.getElementById(element);
+    copyText.style.display = 'block';
 
-1. Add your custom JavaScript code below
-2. Place the this code in your template:
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
 
+    document.execCommand("copy");
 
-
-*/
+    copyText.style.display = 'none';
+}

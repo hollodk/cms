@@ -35,7 +35,22 @@ doctrine:
 {% extends "@MhPage/layout.html.twig" %}
 
 
+### neat features
+
+Copy clipboard, make a:
+
+<input type="text" style="display:none" id="copy-me" value="YAS">
+
+and on your element
+
+<a href="path.php" onclick="copyText('copy-me')">click</a>
+
+
 ### Remember
+
+## Assets
+
+./bin/console assets:install --symlink
 
 ## Extend admin menu
 
