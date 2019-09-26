@@ -42,13 +42,22 @@
 {% set responsive = 'data-responsive-fixed="true"' %}
 {% endif %}
 
+{% set logo_light = 'bundles/mhpage/images/logo.png' %}
+{% set logo_dark = 'bundles/mhpage/images/logo-dark.png' %}
+{% if config.logo_light is defined and config.logo_light != '' %}
+{% set logo_light = config.logo_light %}
+{% endif %}
+{% if config.logo_dark is defined and config.logo_dark != '' %}
+{% set logo_dark = config.logo_dark %}
+{% endif %}
+
 <header id="header" class="{{ config.header.type }}{{ modern }}{{ mini }}{{ logoposition }}{{ fixed }}{{ fixeddisabled }}" {{ fullwidth|raw }} {{ transparent|raw }} {{ responsive|raw }}>
     <div class="header-inner">
         <div class="container">
 
             <div id="logo">
-                <a href="{{ path('mh_page_main') }}" class="logo" data-src-dark="{{ asset('bundles/mhpage/images/logo-dark.png') }}">
-                    <img src="{{ asset('bundles/mhpage/images/logo.png') }}" alt="{{ site.title }}">
+                <a href="{{ path('mh_page_main') }}" class="logo" data-src-dark="{{ asset(logo_dark) }}">
+                    <img src="{{ asset(logo_light) }}" alt="{{ site.title }}">
                 </a>
             </div>
 
