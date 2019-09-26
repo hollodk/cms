@@ -5,14 +5,29 @@
 {% block body %}
 <h1>Site manage</h1>
 
-<div class="card">
-    <div class="card-header">
-        <h3>Management of site</h3>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                <h3>Management of site</h3>
+            </div>
+            <div class="card-body">
+                <p>Click here to make a fresh demo installation</p>
+                <a onclick="return confirm('Are you sure?')" class="btn btn-primary" href="{{ path('mh_page_site_install', {'type':'demo'}) }}">Install demo</a>
+            </div>
+        </div>
     </div>
 
-    <div class="card-body">
-        <p>Click here to make a fresh demo installation</p>
-        <a onclick="return confirm('Are you sure?')" class="btn btn-primary" href="{{ path('mh_page_site_install', {'type':'demo'}) }}">Install demo</a>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                <h3>Readme</h3>
+            </div>
+            <div class="card-body">
+                <p>Project documentation</p>
+                <a class="btn btn-primary" href="{{ path('mh_page_readme_index') }}">Readme</a>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

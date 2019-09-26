@@ -35,6 +35,27 @@ doctrine:
 {% extends "@MhPage/layout.html.twig" %}
 
 
+### Remember
+
+## Extend admin menu
+
+If you need to add more admin items, make a subscriber with
+
+make:subscriber for the request
+
+And then extend Mh\PageBundle\Helper\SiteHelper
+
+
+## Make a user
+
+make:user login
+
+
+## Sitemap
+
+If you need to add more sitemaps, copy the Mh\PageBundle\Command\SitemapCommand
+
+
 ##### DEV VERSION
 
 #### Config file
