@@ -52,6 +52,8 @@ class RegistrationController extends AbstractController
 
                     $entityManager->persist($referral);
                 }
+
+                $request->getSession()->set('referral', null);
             }
 
             $entityManager->persist($user);

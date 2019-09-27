@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Referral
 {
+    private $meta;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -122,5 +124,15 @@ class Referral
     public function preUpdate()
     {
         $this->setUpdatedAt(new \DateTime());
+    }
+
+    public function getMeta()
+    {
+        return $this->meta;
+    }
+
+    public function setMeta($meta)
+    {
+        $this->meta = $meta;
     }
 }
