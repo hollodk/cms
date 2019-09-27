@@ -13,6 +13,9 @@
             <th>Email</th>
             <th>Roles</th>
             <th>Password</th>
+            <th>LastLoginAt</th>
+            <th>CreatedAt</th>
+            <th>UpdatedAt</th>
             <th>actions</th>
         </tr>
     </thead>
@@ -23,6 +26,9 @@
             <td>{{ user.email }}</td>
             <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
             <td>{{ user.password }}</td>
+            <td>{{ user.lastLoginAt ? user.lastLoginAt|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             <td>
                 <a href="{{ path('mh_page_user_show', {'id': user.id}) }}">show</a>
                 <a href="{{ path('mh_page_user_edit', {'id': user.id}) }}">edit</a>
@@ -30,7 +36,7 @@
         </tr>
         {% else %}
         <tr>
-            <td colspan="5">no records found</td>
+            <td colspan="8">no records found</td>
         </tr>
         {% endfor %}
     </tbody>

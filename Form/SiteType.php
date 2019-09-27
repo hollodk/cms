@@ -25,7 +25,7 @@ class SiteType extends AbstractType
             ->add('title', null, $opt)
             ->add('attribute', TextareaType::class, [
                 'attr' => [
-                    'rows' => 30,
+                    'rows' => 20,
                     'class' => $attr['class'].' json',
                 ],
             ])

@@ -31,14 +31,14 @@ class PageType extends AbstractType
             ->add('content', TextareaType::class, [
                 'required' => false,
                 'attr' => [
-                    'rows' => 30,
+                    'rows' => 20,
                     'class' => $attr['class'].' summernote',
                 ],
             ])
             ->add('attribute', TextareaType::class, [
                 'required' => false,
                 'attr' => [
-                    'rows' => 30,
+                    'rows' => 20,
                     'class' => $attr['class'].' json',
                 ],
             ])

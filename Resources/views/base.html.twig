@@ -46,27 +46,8 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+        <script src="{{ asset('bundles/mhpage/js/summernote-ext-addclass.js') }}"></script>
         <script src="{{ asset('bundles/mhpage/js/custom.js') }}"></script>
-
-        <script>
-        function prettyPrint(element) {
-
-            var ugly = element.value;
-
-            var obj = JSON.parse(ugly);
-            var pretty = JSON.stringify(obj, undefined, 4);
-
-            element.value = pretty;
-        }
-
-        $(document).ready(function() {
-            $('.select2').select2();
-            $('.summernote').summernote();
-            $('.json').each(function (index, element) {
-                prettyPrint(element);
-            });
-        });
-        </script>
 
         {% block javascripts %}{% endblock %}
     </body>

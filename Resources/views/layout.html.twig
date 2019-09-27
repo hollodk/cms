@@ -5,6 +5,7 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="author" content="{% block author %}{{ config.author }}{% endblock %}" />
         <meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
+        {% block meta %}{% endblock %}
 
         <title>{% block title %}{{ site.title }}{% endblock %}</title>
 
