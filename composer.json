@@ -14,7 +14,8 @@
     },
     "require": {
         "cocur/slugify": "^3.2",
-        "michelf/php-markdown": "^1.8"
+        "michelf/php-markdown": "^1.8",
+        "knplabs/knp-paginator-bundle": "^4.0"
     },
     "require-dev": {
         "symfony/var-dumper": "4.3.*"

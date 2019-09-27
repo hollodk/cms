@@ -22,6 +22,7 @@ class UserType extends AbstractType
         $builder
             ->add('email', null, $opt)
             ->add('password', null, $opt)
+            ->add('keyPublic', null, $opt)
         ;
     }
 
