@@ -3,13 +3,27 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Opret en gratis konto</h2>
+        </div>
+        <div class="card-body">
+            <p>Med en konto hos Couponia.dk, får du mulighed for at holde styr på facebook konkurrencer du er tilmeldt, og du kan samtidig tjene penge online, altsammen 100% gratis.</p>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+            {{ form_start(registrationForm) }}
+            <div class="form-group">
+                {{ form_label(registrationForm.email) }}
+                {{ form_widget(registrationForm.email) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(registrationForm.plainPassword) }}
+                {{ form_widget(registrationForm.plainPassword) }}
+            </div>
 
-        <button class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+            <button class="btn btn-primary">Opret en gratis konto</button>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+</div>
 {% endblock %}

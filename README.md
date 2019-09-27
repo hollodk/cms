@@ -67,6 +67,13 @@ doctrine:
                 alias: 'MhPageBundle'
 
 
+### change the redirect after login
+
+add the ENV variable
+
+REDIRECT_AFTER_LOGIN=user_dashboard
+
+
 ### template base.html.twig
 
 {% extends "@MhPage/base.html.twig" %}
