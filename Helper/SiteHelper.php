@@ -20,70 +20,78 @@ class SiteHelper
     {
         $this->em = $container->get('doctrine.orm.default_entity_manager');
         $this->container = $container;
+
+        $this->setAdminItems();
     }
 
     private function setAdminItems()
     {
-        $this->list[10] = [
+        $this->list[100] = [
             'url' => 'mh_page_site_index',
             'name' => 'Site',
             'admin' => true,
         ];
 
-        $this->list[20] = [
+        $this->list[200] = [
             'url' => 'mh_page_menu_index',
             'name' => 'Menu',
             'admin' => true,
         ];
 
-        $this->list[30] = [
+        $this->list[300] = [
             'url' => 'mh_page_menu_item_index',
             'name' => 'Menu Items',
             'admin' => true,
         ];
 
-        $this->list[40] = [
+        $this->list[400] = [
             'url' => 'mh_page_page_index',
             'name' => 'Page',
             'admin' => true,
         ];
 
-        $this->list[50] = [
+        $this->list[500] = [
             'url' => 'mh_page_post_index',
             'name' => 'Post',
             'admin' => true,
         ];
 
-        $this->list[60] = [
+        $this->list[600] = [
             'url' => 'mh_page_tag_index',
             'name' => 'Tag',
             'admin' => true,
         ];
 
-        $this->list[65] = [
+        $this->list[650] = [
             'url' => 'mh_page_keyword_index',
             'name' => 'Keyword',
             'admin' => true,
         ];
 
-        $this->list[70] = [
+        $this->list[700] = [
             'url' => 'mh_page_site_manage',
             'name' => 'Manage site',
             'admin' => true,
         ];
 
-        $this->list[75] = [
+        $this->list[750] = [
             'url' => 'mh_page_user_index',
             'name' => 'User',
             'admin' => true,
         ];
 
-        $this->list[78] = [
+        $this->list[775] = [
+            'url' => 'mh_page_referral_index',
+            'name' => 'Referral',
+            'admin' => true,
+        ];
+
+        $this->list[780] = [
             'url' => 'mh_page_app_logout',
             'name' => 'Logout',
         ];
 
-        $this->list[80] = [
+        $this->list[800] = [
             'url' => 'mh_page_main',
             'target' => '_blank',
             'name' => 'Frontpage',
@@ -101,8 +109,6 @@ class SiteHelper
 
     public function getAdminList()
     {
-        $this->setAdminItems();
-
         ksort($this->list);
 
         return $this->list;

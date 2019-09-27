@@ -92,7 +92,7 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
         if (isset($_ENV['REDIRECT_AFTER_LOGIN']) && isset($_ENV['REDIRECT_AFTER_LOGIN'])) {
             $url = $_ENV['REDIRECT_AFTER_LOGIN'];
         } else {
-            $url = 'mh_page_profile_dashboard';
+            $url = 'mh_page_site_index';
         }
 
         return new RedirectResponse($this->urlGenerator->generate($url));

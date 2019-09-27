@@ -2,6 +2,8 @@
 
 namespace Mh\PageBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -55,6 +57,16 @@ class User implements UserInterface
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Mh\PageBundle\Entity\Referral", mappedBy="user")
+     */
+    private $referrals;
+
+    public function __construct()
+    {
+        $this->referrals = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -198,5 +210,36 @@ class User implements UserInterface
     public function preUpdate()
     {
         $this->setUpdatedAt(new \DateTime());
+    }
+
+    /**
+     * @return Collection|Referral[]
+     */
+    public function getReferrals(): Collection
+    {
+        return $this->referrals;
+    }
+
+    public function addReferral(Referral $referral): self
+    {
+        if (!$this->referrals->contains($referral)) {
+            $this->referrals[] = $referral;
+            $referral->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReferral(Referral $referral): self
+    {
+        if ($this->referrals->contains($referral)) {
+            $this->referrals->removeElement($referral);
+            // set the owning side to null (unless already changed)
+            if ($referral->getUser() === $this) {
+                $referral->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

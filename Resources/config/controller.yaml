@@ -1,17 +1,20 @@
 services:
+    Mh\PageBundle\Command\:
+        resource: '../../Command'
+        tags: ['console.command']
+        arguments: ['@service_container', '@logger', '@security.user_password_encoder.generic']
+
     Mh\PageBundle\Controller\:
         resource: '../../Controller'
         tags: ['controller.service_arguments']
 
-    Mh\PageBundle\Command\:
-        resource: '../../Command'
-        public: true
-        tags: ['console.command']
-        arguments: ['@service_container', '@logger', '@security.user_password_encoder.generic']
+    Mh\PageBundle\EventSubscriber\:
+        resource: '../../EventSubscriber'
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
 
     Mh\PageBundle\Helper\:
         resource: '../../Helper'
-        public: true
         arguments: ['@service_container', '@logger']
 
     Mh\PageBundle\Repository\:

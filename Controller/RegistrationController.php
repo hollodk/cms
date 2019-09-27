@@ -2,6 +2,7 @@
 
 namespace Mh\PageBundle\Controller;
 
+use Mh\PageBundle\Entity\Referral;
 use Mh\PageBundle\Entity\User;
 use Mh\PageBundle\Form\RegistrationFormType;
 use Mh\PageBundle\Security\AppCustomAuthenticator;
@@ -24,6 +25,8 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -37,7 +40,20 @@ class RegistrationController extends AbstractController
 
             $user->setKeyPublic($key);
 
-            $entityManager = $this->getDoctrine()->getManager();
+            $attr = $request->getSession()->get('referral');
+            if ($attr) {
+                $owner = $entityManager->getRepository('MhPageBundle:User')->findOneByKeyPublic($attr->key);
+
+                if ($owner) {
+                    $referral = new Referral();
+                    $referral->setAttribute(json_encode($attr));
+                    $referral->setReferral($user);
+                    $referral->setUser($owner);
+
+                    $entityManager->persist($referral);
+                }
+            }
+
             $entityManager->persist($user);
             $entityManager->flush();
 
