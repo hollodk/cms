@@ -23,11 +23,13 @@ class MenuItemType extends AbstractType
         $builder
             ->add('title', null, $opt)
             ->add('priority', null, $opt)
+            ->add('url', null, $opt)
             ->add('menu', EntityType::class, [
                 'attr' => $attr,
                 'class' => 'MhPageBundle:Menu',
             ])
             ->add('page', EntityType::class, [
+                'required' => false,
                 'attr' => $attr,
                 'class' => 'MhPageBundle:Page',
             ])

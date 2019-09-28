@@ -13,6 +13,7 @@
                 <th>Priority</th>
                 <th>Title</th>
                 <th>Slug</th>
+                <th>Url</th>
                 <th>Page</th>
                 <th>Url</th>
                 <th>CreatedAt</th>
@@ -27,7 +28,8 @@
                 <td>{{ menu_item.priority }}</td>
                 <td>{{ menu_item.title }}</td>
                 <td>{{ menu_item.slug }}</td>
-                <td><a href="{{ path('mh_page_page_edit', {'id':menu_item.page.id}) }}">{{ menu_item.page.header }}</a></td>
+                <td>{{ menu_item.url }}</td>
+                <td>{% if menu_item.page %}<a href="{{ path('mh_page_page_edit', {'id':menu_item.page.id}) }}">{{ menu_item.page.header }}</a>{% endif %}</td>
                 <td><a href="{{ url('mh_page_wildcard', {'page':menu_item.slug}) }}">{{ url('mh_page_wildcard', {'page':menu_item.slug}) }}</a></td>
                 <td>{{ menu_item.createdAt ? menu_item.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ menu_item.updatedAt ? menu_item.updatedAt|date('Y-m-d H:i:s') : '' }}</td>

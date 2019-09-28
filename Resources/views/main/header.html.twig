@@ -74,7 +74,13 @@
                             {% endif %}
                             {% if menu %}
                             {% for item in menu_items %}
+
+                            {% if item.url %}
+                            <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+                            {% else %}
                             <li><a href="{{ path('mh_page_wildcard', {'page':item.slug}) }}">{{ item.title }}</a></li>
+                            {% endif %}
+
                             {% endfor %}
                             {% endif %}
                             {% if config.show_login is defined and config.show_login == true %}
