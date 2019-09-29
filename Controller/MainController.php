@@ -33,6 +33,20 @@ class MainController extends AbstractController
     }
 
     /**
+     * @Route("/terms", name="main_terms")
+     */
+    public function terms(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $siteHelper = $this->get('Mh\PageBundle\Helper\SiteHelper');
+
+        $page = $em->getRepository('MhPageBundle:Page')->findOneByName('terms');
+        $params = $siteHelper->build($request, $page);
+
+        return $this->render('main/index.html.twig', $params);
+    }
+
+    /**
      * @Route("/post/{id}-{slug}", name="main_post")
      */
     public function post(Post $post, SiteHelper $siteHelper, $slug)
@@ -76,7 +90,7 @@ class MainController extends AbstractController
                 throw new \Exception('page not found');
             }
 
-            $page = $em->getRepository('MhPageBundle:Page')->findOneByHeader('Keyword');
+            $page = $em->getRepository('MhPageBundle:Page')->findOneByName('keyword');
             $page->setHeader($keyword->getTitle());
 
         } else {

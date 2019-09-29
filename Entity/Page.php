@@ -64,6 +64,11 @@ class Page
      */
     private $site;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
 
     public function __toString()
     {
@@ -266,5 +271,17 @@ class Page
         }
 
         return $attr;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }

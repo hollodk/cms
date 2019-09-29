@@ -263,6 +263,7 @@ class SiteHelper
         $this->em->persist($menu);
 
         $page = new Page();
+        $page->setName('frontpage');
         $page->setHeader('Frontpage');
         $page->setIsFrontpage(true);
         $page->setSite($site);
@@ -270,12 +271,14 @@ class SiteHelper
         $this->em->persist($page);
 
         $page = new Page();
+        $page->setName('keyword');
         $page->setHeader('Keyword');
         $page->setSite($site);
 
         $this->em->persist($page);
 
         $page = new Page();
+        $page->setName('about-us');
         $page->setHeader('About us');
         $page->setSite($site);
 
@@ -304,6 +307,7 @@ class SiteHelper
         $this->em->persist($menuItem);
 
         $page = new Page();
+        $page->setName('services');
         $page->setHeader('Services');
         $page->setSite($site);
 
@@ -365,7 +369,8 @@ class SiteHelper
         "type": "light",
         "content": false,
         "copyright": true,
-        "text": "Copyright &copy; 2019, by betting-kings.com"
+        "text": "Copyright &copy; 2019, by betting-kings.com",
+        "shot_terms": false
     }
 }
 ';

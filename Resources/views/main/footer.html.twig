@@ -68,7 +68,9 @@
     {% if fc.copyright is defined and fc.copyright == true %}
     <div class="copyright-content">
         <div class="container">
-            <div class="copyright-text text-center">{{ fc.text|raw }}</div>
+            <div class="copyright-text text-center">
+                {{ fc.text|raw }}{% if fc.show_terms is defined and fc.show_terms == true %}, <a href="{{ path('mh_page_main_terms') }}">Terms of Use / Privacy Policy</a>{% endif %}
+            </div>
         </div>
     </div>
     {% endif %}

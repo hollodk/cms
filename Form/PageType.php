@@ -22,6 +22,7 @@ class PageType extends AbstractType
         ];
 
         $builder
+            ->add('name', null, $opt)
             ->add('isFrontpage')
             ->add('site', EntityType::class, [
                 'attr' => $attr,
