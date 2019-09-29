@@ -1,8 +1,8 @@
 services:
     Mh\PageBundle\Command\:
         resource: '../../Command'
-        tags: ['console.command']
         arguments: ['@service_container', '@logger', '@security.user_password_encoder.generic']
+        tags: ['console.command']
 
     Mh\PageBundle\Controller\:
         resource: '../../Controller'
@@ -10,6 +10,7 @@ services:
 
     Mh\PageBundle\EventSubscriber\:
         resource: '../../EventSubscriber'
+        arguments: ['@service_container']
         tags:
             - { name: kernel.event_listener, event: kernel.request }
 
@@ -20,8 +21,8 @@ services:
 
     Mh\PageBundle\Repository\:
         resource: '../../Repository'
-        tags: ['doctrine.repository_service']
         arguments: ['@doctrine']
+        tags: ['doctrine.repository_service']
 
     Mh\PageBundle\Security\:
         resource: '../../Security'

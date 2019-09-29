@@ -118,11 +118,6 @@ class SiteHelper
         return $this->list;
     }
 
-    public function getDefaults()
-    {
-        return [];
-    }
-
     private function getSite()
     {
         $site = $this->em->getRepository('MhPageBundle:Site')->findOneBy(
@@ -143,13 +138,14 @@ class SiteHelper
         return $menu;
     }
 
-    public function build(Request $request, Page $page)
+    public function setDefaults()
     {
-        $params = $this->getDefaults();
+        $site = $this->getSite();
+        $config = json_decode($site->getAttribute(), true);
 
-        $this->twig->setConfig($page->getPageConfig());
         $this->twig->setSite($this->getSite());
         $this->twig->setMenu($this->getMenu());
+        $this->twig->setConfig($config);
 
         $items = $this->em->getRepository('MhPageBundle:MenuItem')->findBy(
             ['menu' => $this->getMenu()],
@@ -157,13 +153,17 @@ class SiteHelper
         );
 
         $this->twig->setMenuItems($items);
+    }
+
+    public function build(Request $request, Page $page)
+    {
+        $this->twig->setConfig($page->getPageConfig());
 
         $html = $this->process($request, $page->getContent());
 
+        $params = [];
         $params['page'] = $page;
         $params['content'] = $html;
-        $params['page'] = $page;
-        $params['admin_menu'] = $this->getAdminList();
 
         return $params;
     }

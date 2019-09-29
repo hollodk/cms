@@ -2,13 +2,24 @@
 
 namespace Mh\PageBundle\EventSubscriber;
 
+use Psr\Container\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class RequestSubscriber implements EventSubscriberInterface
 {
+    private $container;
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
     public function onKernelRequest(RequestEvent $event)
     {
+        $site = $this->container->get('Mh\PageBundle\Helper\SiteHelper');
+        $site->setDefaults();
+
         $request = $event->getRequest();
         $server = $request->server;
 
