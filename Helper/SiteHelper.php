@@ -343,6 +343,7 @@ class SiteHelper
     },
     "topbar": {
         "type": "light",
+        "text_color": null,
         "fullwidth": true,
         "phone": "",
         "email": "info@bettingkings.com",

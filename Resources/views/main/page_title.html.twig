@@ -12,6 +12,11 @@
 {% endif %}
 {% endif %}
 
+{% set fontcolor = '' %}
+{% if ptc.text_color is defined and ptc.text_color %}
+{% set fontcolor = 'color:'~ptc.text_color~';' %}
+{% endif %}
+
 {% set position = '' %}
 {% if ptc.position is defined %}
 {% if ptc.position == 'left' %}
@@ -43,9 +48,9 @@
         </div>
         {% endif %}
         <div class="page-title" {{ fade|raw }}>
-            <h1>{{ page.header }}</h1>
+            <h1 style="{{ fontcolor }}">{{ page.header }}</h1>
             {% if ptc.sub_header is defined and ptc.sub_header != '' %}
-            <span>{{ ptc.sub_header }}</span>
+            <span style="{{ fontcolor }}">{{ ptc.sub_header }}</span>
             {% endif %}
         </div>
     </div>
