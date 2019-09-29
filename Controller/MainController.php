@@ -5,6 +5,7 @@ namespace Mh\PageBundle\Controller;
 use Mh\PageBundle\Entity\Page;
 use Mh\PageBundle\Entity\Post;
 use Mh\PageBundle\Helper\SiteHelper;
+use Mh\PageBundle\Helper\TwigHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,11 +39,8 @@ class MainController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $params = $siteHelper->getDefaults();
-
-        $params['config'] = json_decode($params['site']->getAttribute(), true);
+        $params = [];
         $params['post'] = $post;
-
         $params['next'] = $em->getRepository('MhPageBundle:Post')->getNext($post);
         $params['prev'] = $em->getRepository('MhPageBundle:Post')->getPrev($post);
 
@@ -71,8 +69,8 @@ class MainController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
         $menuItem = $em->getRepository('MhPageBundle:MenuItem')->findOneBySlug($request->get('page'));
-
         if (!$menuItem) {
+
             $keyword = $em->getRepository('MhPageBundle:Keyword')->findOneBySlug($request->get('page'));
             if (!$keyword) {
                 throw new \Exception('page not found');

@@ -1,10 +1,30 @@
 <ul class="navbar-nav mr-auto">
     {% for item in admin_list %}
-    <li class="nav-item">
+
+    {% set dropdown = false %}
+    {% if item.items is defined and item.items|length > 0 %}
+    {% set dropdown = true %}
+    {% endif %}
+
+    <li class="nav-item {% if dropdown %}dropdown{% endif %}">
+
         {% if is_granted('ROLE_USER') and (item.admin is not defined or item.admin == false or (item.admin == true and is_granted('ROLE_ADMIN'))) %}
-        <a {% if item.target is defined %}target="{{ item.target }}"{% endif %} class="nav-link" href="{{ path(item.url) }}">{{ item.name }}</a>
+        <a
+            class="nav-link {% if dropdown %}dropdown-toggle{% endif %}"
+            {% if dropdown %}data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %}
+            {% if item.target is defined %}target="{{ item.target }}"{% endif %}
+            {% if item.url is defined and item.url != '' %}href="{{ path(item.url) }}"{% endif %}
+            >{{ item.name }}</a>
+
+            {% if dropdown %}
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for sub in item.items %}
+                <a class="dropdown-item" href="{{ path(sub.url) }}">{{ sub.name }}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
+
         {% endif %}
     </li>
     {% endfor %}
 </ul>
-

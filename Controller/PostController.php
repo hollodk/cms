@@ -18,6 +18,7 @@ class PostController extends AbstractController
 {
     /**
      * @Route("/", name="post_index", methods={"GET"})
+     * @Route("/", name="login_home", methods={"GET"})
      */
     public function index(PostRepository $postRepository): Response
     {

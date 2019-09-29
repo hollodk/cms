@@ -44,11 +44,12 @@
 
 {% set logo_light = 'bundles/mhpage/images/logo.png' %}
 {% set logo_dark = 'bundles/mhpage/images/logo-dark.png' %}
-{% if config.logo_light is defined and config.logo_light != '' %}
-{% set logo_light = config.logo_light %}
+{% if config.main.logo_light is defined and config.main.logo_light != '' %}
+{% set logo_light = config.main.logo_light %}
 {% endif %}
-{% if config.logo_dark is defined and config.logo_dark != '' %}
-{% set logo_dark = config.logo_dark %}
+
+{% if config.main.logo_dark is defined and config.main.logo_dark != '' %}
+{% set logo_dark = config.main.logo_dark %}
 {% endif %}
 
 <header id="header" class="{{ config.header.type }}{{ modern }}{{ mini }}{{ logoposition }}{{ fixed }}{{ fixeddisabled }}" {{ fullwidth|raw }} {{ transparent|raw }} {{ responsive|raw }}>
@@ -57,7 +58,7 @@
 
             <div id="logo">
                 <a href="{{ path('mh_page_main') }}" class="logo" data-src-dark="{{ asset(logo_dark) }}">
-                    <img src="{{ asset(logo_light) }}" alt="{{ site.title }}">
+                    <img src="{{ asset(logo_light) }}" alt="{{ config.site.title }}">
                 </a>
             </div>
 
@@ -69,11 +70,11 @@
                 <div class="container">
                     <nav>
                         <ul>
-                            {% if config.show_home is defined and config.show_home == true %}
+                            {% if config.main.show_home is defined and config.main.show_home == true %}
                             <li><a href="{{ path('mh_page_main') }}">Home</a></li>
                             {% endif %}
-                            {% if menu %}
-                            {% for item in menu_items %}
+
+                            {% for item in config.menuItems %}
 
                             {% if item.url matches '{^http}' %}
                             <li><a href="{{ item.url }}">{{ item.title }}</a></li>
@@ -84,14 +85,18 @@
                             {% endif %}
 
                             {% endfor %}
-                            {% endif %}
-                            {% if config.show_login is defined and config.show_login == true %}
+
+                            {% if config.main.show_login is defined and config.main.show_login == true and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            <li><a href="{{ path('mh_page_login_home') }}">Profile</a></li>
+                            {% elseif config.main.show_login is defined and config.main.show_login == true %}
                             <li><a href="{{ path('mh_page_app_login') }}">Login</a></li>
                             {% endif %}
-                            {% if config.show_register is defined and config.show_register == true %}
+
+                            {% if config.main.show_register is defined and config.main.show_register == true %}
                             <li><a href="{{ path('mh_page_app_register') }}">Register</a></li>
                             {% endif %}
-                            {% if config.show_admin is defined and config.show_admin == true %}
+
+                            {% if config.main.show_admin is defined and config.main.show_admin == true %}
                             <li><a href="{{ path('mh_page_admin') }}">Admin</a></li>
                             {% endif %}
                         </ul>
@@ -102,4 +107,3 @@
         </div>
     </div>
 </header>
-

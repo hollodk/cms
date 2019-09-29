@@ -16,6 +16,7 @@ services:
     Mh\PageBundle\Helper\:
         resource: '../../Helper'
         arguments: ['@service_container', '@logger']
+        public: true
 
     Mh\PageBundle\Repository\:
         resource: '../../Repository'

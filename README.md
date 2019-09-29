@@ -17,6 +17,13 @@ knp_paginator:
         sortable: '@KnpPaginator/Pagination/sortable_link.html.twig'
         filtration: '@KnpPaginator/Pagination/filtration.html.twig'
 
+### twig
+add this to your twig config, so we have a global configuration service
+
+twig:
+    globals: 'Mh\PageBundle\Helper\TwigHelper'
+
+
 ### security
 
 /config/packages/securty.yaml
@@ -84,9 +91,7 @@ doctrine:
 
 ### change the redirect after login
 
-add the ENV variable
-
-REDIRECT_AFTER_LOGIN=user_dashboard
+we redirect to the route mh_page_login_home, just override that
 
 
 ### template base.html.twig

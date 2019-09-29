@@ -6,19 +6,24 @@ use Mh\PageBundle\Entity\Menu;
 use Mh\PageBundle\Entity\MenuItem;
 use Mh\PageBundle\Entity\Page;
 use Mh\PageBundle\Entity\Site;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Mh\PageBundle\Helper\TwigHelper;
+use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class SiteHelper
 {
     private $em;
+    private $twig;
+    private $logger;
     private $container;
 
     private $list = [];
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container, LoggerInterface $logger)
     {
         $this->em = $container->get('doctrine.orm.default_entity_manager');
+        $this->twig = $container->get('Mh\PageBundle\Helper\TwigHelper');
         $this->container = $container;
 
         $this->setAdminItems();
@@ -27,71 +32,70 @@ class SiteHelper
     private function setAdminItems()
     {
         $this->list[100] = [
+            'url' => '',
+            'name' => 'Admin',
+            'admin' => true,
+            'items' => [],
+        ];
+
+        $this->list[100]['items'][100] = [
             'url' => 'mh_page_site_index',
             'name' => 'Site',
             'admin' => true,
         ];
 
-        $this->list[200] = [
+
+        $this->list[100]['items'][200] = [
             'url' => 'mh_page_menu_index',
             'name' => 'Menu',
-            'admin' => true,
+        ];
+
+        $this->list[100]['items'][300] = [
+            'url' => 'mh_page_menu_item_index',
+            'name' => 'Menu Items',
+        ];
+
+        $this->list[100]['items'][400] = [
+            'url' => 'mh_page_page_index',
+            'name' => 'Page',
+        ];
+
+        $this->list[100]['items'][500] = [
+            'url' => 'mh_page_post_index',
+            'name' => 'Post',
+        ];
+
+        $this->list[100]['items'][600] = [
+            'url' => 'mh_page_tag_index',
+            'name' => 'Tag',
+        ];
+
+        $this->list[100]['items'][700] = [
+            'url' => 'mh_page_keyword_index',
+            'name' => 'Keyword',
+        ];
+
+        $this->list[100]['items'][800] = [
+            'url' => 'mh_page_site_manage',
+            'name' => 'Manage site',
+        ];
+
+        $this->list[100]['items'][900] = [
+            'url' => 'mh_page_user_index',
+            'name' => 'User',
+        ];
+
+        $this->list[100]['items'][1000] = [
+            'url' => 'mh_page_referral_index',
+            'name' => 'Referral',
         ];
 
         $this->list[300] = [
-            'url' => 'mh_page_menu_item_index',
-            'name' => 'Menu Items',
-            'admin' => true,
-        ];
-
-        $this->list[400] = [
-            'url' => 'mh_page_page_index',
-            'name' => 'Page',
-            'admin' => true,
-        ];
-
-        $this->list[500] = [
-            'url' => 'mh_page_post_index',
-            'name' => 'Post',
-            'admin' => true,
-        ];
-
-        $this->list[600] = [
-            'url' => 'mh_page_tag_index',
-            'name' => 'Tag',
-            'admin' => true,
-        ];
-
-        $this->list[650] = [
-            'url' => 'mh_page_keyword_index',
-            'name' => 'Keyword',
-            'admin' => true,
-        ];
-
-        $this->list[700] = [
-            'url' => 'mh_page_site_manage',
-            'name' => 'Manage site',
-            'admin' => true,
-        ];
-
-        $this->list[750] = [
-            'url' => 'mh_page_user_index',
-            'name' => 'User',
-            'admin' => true,
-        ];
-
-        $this->list[775] = [
-            'url' => 'mh_page_referral_index',
-            'name' => 'Referral',
-            'admin' => true,
-        ];
-
-        $this->list[780] = [
             'url' => 'mh_page_app_logout',
             'name' => 'Logout',
         ];
 
-        $this->list[800] = [
+        $this->list[400] = [
             'url' => 'mh_page_main',
             'target' => '_blank',
             'name' => 'Frontpage',
@@ -116,17 +120,7 @@ class SiteHelper
 
     public function getDefaults()
     {
-        $params = [];
-
-        $params['site'] = $this->getSite();
-        $params['menu'] = $this->getMenu();
-        $params['menu_items'] = $this->em->getRepository('MhPageBundle:MenuItem')->findBy(
-            ['menu' => $params['menu']],
-            ['priority' => 'ASC']
-        );
-        $params['admin_menu'] = $this->getAdminList();
-
-        return $params;
+        return [];
     }
 
     private function getSite()
@@ -153,12 +147,22 @@ class SiteHelper
     {
         $params = $this->getDefaults();
 
+        $this->twig->setConfig($page->getPageConfig());
+        $this->twig->setSite($this->getSite());
+        $this->twig->setMenu($this->getMenu());
+
+        $items = $this->em->getRepository('MhPageBundle:MenuItem')->findBy(
+            ['menu' => $this->getMenu()],
+            ['priority' => 'ASC']
+        );
+
+        $this->twig->setMenuItems($items);
+
         $html = $this->process($request, $page->getContent());
 
         $params['page'] = $page;
         $params['content'] = $html;
         $params['page'] = $page;
-        $params['config'] = $page->getPageConfig();
         $params['admin_menu'] = $this->getAdminList();
 
         return $params;
@@ -321,15 +325,17 @@ class SiteHelper
     {
         $attr = '
         {
-    "show_admin": true,
-    "show_login": false,
-    "show_register": false,
-    "show_home": true,
-    "description": "Free information about betting tips from the best experienced tipsters. Professional analyze made by our betting experts to help you place your online bets.",
-    "author": "Betting Kinds",
-    "google": false,
-    "logo-light": false,
-    "logo-dark": false,
+    "main": {
+        "show_admin": true,
+        "show_login": false,
+        "show_register": false,
+        "show_home": true,
+        "description": "Free information about betting tips from the best experienced tipsters. Professional analyze made by our betting experts to help you place your online bets.",
+        "author": "Betting Kinds",
+        "google": false,
+        "logo-light": false,
+        "logo-dark": false
+    },
     "topbar": {
         "type": "light",
         "fullwidth": true,

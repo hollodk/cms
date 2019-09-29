@@ -3,11 +3,11 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta name="author" content="{% block author %}{{ config.author }}{% endblock %}" />
-        <meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
+        <meta name="author" content="{% block author %}{{ config.main.author }}{% endblock %}" />
+        <meta name="description" content="{% block description %}{{ config.main.description }}{% endblock %}">
         {% block meta %}{% endblock %}
 
-        <title>{% block title %}{{ site.title }}{% endblock %}</title>
+        <title>{% block title %}{{ config.site.title }}{% endblock %}</title>
 
         <link href="{{ asset('bundles/mhpage/css/plugins.css') }}" rel="stylesheet">
         <link href="{{ asset('bundles/mhpage/css/style.css') }}" rel="stylesheet">
@@ -82,14 +82,14 @@
         <script src="{{ asset('bundles/mhpage/js/functions.js') }}"></script>
         <script src="{{ asset('bundles/mhpage/js/custom.js') }}"></script>
 
-        {% if config.google is defined and config.google %}
+        {% if config.main.google is defined and config.main.google %}
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-102242943-1"></script>
         <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', '{{ config.google }}');
+        gtag('config', '{{ config.main.google }}');
         </script>
         {% endif %}
 
