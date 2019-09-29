@@ -334,6 +334,7 @@ class SiteHelper
         "show_login": false,
         "show_register": false,
         "show_home": true,
+        "create_account": true,
         "description": "Free information about betting tips from the best experienced tipsters. Professional analyze made by our betting experts to help you place your online bets.",
         "author": "Betting Kinds",
         "google": false,

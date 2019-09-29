@@ -43,7 +43,7 @@ class MainController extends AbstractController
         $page = $em->getRepository('MhPageBundle:Page')->findOneByName('terms');
         $params = $siteHelper->build($request, $page);
 
-        return $this->render('main/index.html.twig', $params);
+        return $this->render('@MhPage/main/index.html.twig', $params);
     }
 
     /**

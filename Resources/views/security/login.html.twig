@@ -26,9 +26,13 @@
 
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                <button class="btn btn-lg btn-primary" type="submit">
-                    Log ind
-                </button>
+                <button class="btn btn-lg btn-primary" type="submit">Log ind</button>
+                {% if config.main.create_account is defined and config.main.create_account == true %}
+                <hr>
+
+                <p>If you do not have an account yet.</p>
+                <a class="btn btn-primary" href="{{ path('mh_page_app_register') }}">Register account</a>
+                {% endif %}
             </form>
         </div>
     </div>
