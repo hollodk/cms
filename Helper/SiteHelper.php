@@ -90,6 +90,21 @@ class SiteHelper
             'name' => 'Referral',
         ];
 
+        $this->list[100]['items'][1100] = [
+            'url' => 'mh_page_product_index',
+            'name' => 'Product',
+        ];
+
+        $this->list[100]['items'][1200] = [
+            'url' => 'mh_page_brand_index',
+            'name' => 'Brand',
+        ];
+
+        $this->list[100]['items'][1300] = [
+            'url' => 'mh_page_seller_index',
+            'name' => 'Seller',
+        ];
+
         $this->list[300] = [
             'url' => 'mh_page_app_logout',
             'name' => 'Logout',

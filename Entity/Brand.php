@@ -7,10 +7,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Mh\PageBundle\Repository\TagRepository")
+ * @ORM\Entity(repositoryClass="Mh\PageBundle\Repository\BrandRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Tag
+class Brand
 {
     /**
      * @ORM\Id()
@@ -35,12 +35,7 @@ class Tag
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Mh\PageBundle\Entity\Post", mappedBy="tags")
-     */
-    private $posts;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Mh\PageBundle\Entity\Product", mappedBy="tags")
+     * @ORM\OneToMany(targetEntity="Mh\PageBundle\Entity\Product", mappedBy="brand")
      */
     private $products;
 
@@ -52,7 +47,6 @@ class Tag
 
     public function __construct()
     {
-        $this->posts = new ArrayCollection();
         $this->products = new ArrayCollection();
     }
 
@@ -98,6 +92,37 @@ class Tag
     }
 
     /**
+     * @return Collection|Product[]
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+            $product->setBrand($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        if ($this->products->contains($product)) {
+            $this->products->removeElement($product);
+            // set the owning side to null (unless already changed)
+            if ($product->getBrand() === $this) {
+                $product->setBrand(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * @ORM\PrePersist
      */
     public function prePersist()
@@ -112,61 +137,5 @@ class Tag
     public function preUpdate()
     {
         $this->setUpdatedAt(new \DateTime());
-    }
-
-    /**
-     * @return Collection|Post[]
-     */
-    public function getPosts(): Collection
-    {
-        return $this->posts;
-    }
-
-    public function addPost(Post $post): self
-    {
-        if (!$this->posts->contains($post)) {
-            $this->posts[] = $post;
-            $post->addTag($this);
-        }
-
-        return $this;
-    }
-
-    public function removePost(Post $post): self
-    {
-        if ($this->posts->contains($post)) {
-            $this->posts->removeElement($post);
-            $post->removeTag($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Product[]
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Product $product): self
-    {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-            $product->addTag($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): self
-    {
-        if ($this->products->contains($product)) {
-            $this->products->removeElement($product);
-            $product->removeTag($this);
-        }
-
-        return $this;
     }
 }
