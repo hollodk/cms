@@ -21,6 +21,7 @@ class TagType extends AbstractType
 
         $builder
             ->add('name', null, $opt)
+            ->add('type', null, $opt)
         ;
     }
 
