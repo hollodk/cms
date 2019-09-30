@@ -44,6 +44,16 @@ class Tag
      */
     private $products;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $amountProducts;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $amountPosts;
+
 
     public function __toString()
     {
@@ -166,6 +176,30 @@ class Tag
             $this->products->removeElement($product);
             $product->removeTag($this);
         }
+
+        return $this;
+    }
+
+    public function getAmountProducts(): ?int
+    {
+        return $this->amountProducts;
+    }
+
+    public function setAmountProducts(?int $amountProducts): self
+    {
+        $this->amountProducts = $amountProducts;
+
+        return $this;
+    }
+
+    public function getAmountPosts(): ?int
+    {
+        return $this->amountPosts;
+    }
+
+    public function setAmountPosts(?int $amountPosts): self
+    {
+        $this->amountPosts = $amountPosts;
 
         return $this;
     }
