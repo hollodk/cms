@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Partner index{% endblock %}
+
+{% block body %}
+    <h1>Partner index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>UrlAffiliate</th>
+                <th>LogoUrl</th>
+                <th>Commission</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for partner in partners %}
+            <tr>
+                <td>{{ partner.id }}</td>
+                <td>{{ partner.name }}</td>
+                <td>{{ partner.urlAffiliate }}</td>
+                <td>{{ partner.logoUrl }}</td>
+                <td>{{ partner.commission }}</td>
+                <td>{{ partner.createdAt ? partner.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ partner.updatedAt ? partner.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('mh_page_partner_show', {'id': partner.id}) }}">show</a>
+                    <a href="{{ path('mh_page_partner_edit', {'id': partner.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('mh_page_partner_new') }}">Create new</a>
+{% endblock %}

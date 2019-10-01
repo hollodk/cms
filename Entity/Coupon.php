@@ -33,11 +33,6 @@ class Coupon
     private $offerUrl;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Mh\PageBundle\Entity\Seller", inversedBy="coupons")
-     */
-    private $seller;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $validFrom;
@@ -56,6 +51,11 @@ class Coupon
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Mh\PageBundle\Entity\Partner", inversedBy="coupons")
+     */
+    private $partner;
 
     public function getId(): ?int
     {
@@ -94,18 +94,6 @@ class Coupon
     public function setOfferUrl(?string $offerUrl): self
     {
         $this->offerUrl = $offerUrl;
-
-        return $this;
-    }
-
-    public function getSeller(): ?Seller
-    {
-        return $this->seller;
-    }
-
-    public function setSeller(?Seller $seller): self
-    {
-        $this->seller = $seller;
 
         return $this;
     }
@@ -173,5 +161,17 @@ class Coupon
     public function preUpdate()
     {
         $this->setUpdatedAt(new \DateTime());
+    }
+
+    public function getPartner(): ?Partner
+    {
+        return $this->partner;
+    }
+
+    public function setPartner(?Partner $partner): self
+    {
+        $this->partner = $partner;
+
+        return $this;
     }
 }

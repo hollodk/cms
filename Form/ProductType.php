@@ -28,7 +28,7 @@ class ProductType extends AbstractType
             ->add('urlRedirect', null, $opt)
             ->add('description', null, $opt)
             ->add('brand', null, $opt)
-            ->add('seller', null, $opt)
+            ->add('partner', null, $opt)
             ->add('tags', null, $opt)
         ;
     }

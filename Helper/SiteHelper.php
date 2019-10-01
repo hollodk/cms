@@ -101,8 +101,8 @@ class SiteHelper
         ];
 
         $this->list[100]['items'][1300] = [
-            'url' => 'mh_page_seller_index',
-            'name' => 'Seller',
+            'url' => 'mh_page_partner_index',
+            'name' => 'Partner',
         ];
 
         $this->list[100]['items'][1400] = [

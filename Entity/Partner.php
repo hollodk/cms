@@ -7,10 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Mh\PageBundle\Repository\SellerRepository")
- * @ORM\HasLifecycleCallbacks()
+ * @ORM\Entity(repositoryClass="Mh\PageBundle\Repository\PartnerRepository")
  */
-class Seller
+class Partner
 {
     /**
      * @ORM\Id()
@@ -25,6 +24,21 @@ class Seller
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $urlAffiliate;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $logoUrl;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $commission;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -35,20 +49,14 @@ class Seller
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Mh\PageBundle\Entity\Product", mappedBy="seller")
+     * @ORM\OneToMany(targetEntity="Mh\PageBundle\Entity\Product", mappedBy="partner")
      */
     private $products;
 
     /**
-     * @ORM\OneToMany(targetEntity="Mh\PageBundle\Entity\Coupon", mappedBy="seller")
+     * @ORM\OneToMany(targetEntity="Mh\PageBundle\Entity\Coupon", mappedBy="partner")
      */
     private $coupons;
-
-
-    public function __toString()
-    {
-        return $this->getName();
-    }
 
     public function __construct()
     {
@@ -69,6 +77,42 @@ class Seller
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getUrlAffiliate(): ?string
+    {
+        return $this->urlAffiliate;
+    }
+
+    public function setUrlAffiliate(string $urlAffiliate): self
+    {
+        $this->urlAffiliate = $urlAffiliate;
+
+        return $this;
+    }
+
+    public function getLogoUrl(): ?string
+    {
+        return $this->logoUrl;
+    }
+
+    public function setLogoUrl(?string $logoUrl): self
+    {
+        $this->logoUrl = $logoUrl;
+
+        return $this;
+    }
+
+    public function getCommission(): ?string
+    {
+        return $this->commission;
+    }
+
+    public function setCommission(?string $commission): self
+    {
+        $this->commission = $commission;
 
         return $this;
     }
@@ -109,7 +153,7 @@ class Seller
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
-            $product->setSeller($this);
+            $product->setPartner($this);
         }
 
         return $this;
@@ -120,29 +164,12 @@ class Seller
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);
             // set the owning side to null (unless already changed)
-            if ($product->getSeller() === $this) {
-                $product->setSeller(null);
+            if ($product->getPartner() === $this) {
+                $product->setPartner(null);
             }
         }
 
         return $this;
-    }
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function prePersist()
-    {
-        $this->setCreatedAt(new \DateTime());
-        $this->setUpdatedAt(new \DateTime());
-    }
-
-    /**
-     * @ORM\PreUpdate
-     */
-    public function preUpdate()
-    {
-        $this->setUpdatedAt(new \DateTime());
     }
 
     /**
@@ -157,7 +184,7 @@ class Seller
     {
         if (!$this->coupons->contains($coupon)) {
             $this->coupons[] = $coupon;
-            $coupon->setSeller($this);
+            $coupon->setPartner($this);
         }
 
         return $this;
@@ -168,8 +195,8 @@ class Seller
         if ($this->coupons->contains($coupon)) {
             $this->coupons->removeElement($coupon);
             // set the owning side to null (unless already changed)
-            if ($coupon->getSeller() === $this) {
-                $coupon->setSeller(null);
+            if ($coupon->getPartner() === $this) {
+                $coupon->setPartner(null);
             }
         }
 

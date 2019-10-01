@@ -11,15 +11,21 @@ class CouponType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $attr = [
+            'class' => 'form-control',
+        ];
+
+        $opt = [
+            'attr' => $attr,
+        ];
+
         $builder
-            ->add('couponCode')
-            ->add('description')
-            ->add('offerUrl')
+            ->add('couponCode', null, $opt)
+            ->add('description', null, $opt)
+            ->add('offerUrl', null, $opt)
+            ->add('partner', null, $opt)
             ->add('validFrom')
             ->add('validTo')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('seller')
         ;
     }
 

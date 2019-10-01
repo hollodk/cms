@@ -80,14 +80,14 @@ class Product
     private $brand;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Mh\PageBundle\Entity\Seller", inversedBy="products")
-     */
-    private $seller;
-
-    /**
      * @ORM\ManyToMany(targetEntity="Mh\PageBundle\Entity\Tag", inversedBy="products")
      */
     private $tags;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Mh\PageBundle\Entity\Partner", inversedBy="products")
+     */
+    private $partner;
 
     public function __construct()
     {
@@ -243,18 +243,6 @@ class Product
         return $this;
     }
 
-    public function getSeller(): ?Seller
-    {
-        return $this->seller;
-    }
-
-    public function setSeller(?Seller $seller): self
-    {
-        $this->seller = $seller;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Tag[]
      */
@@ -296,5 +284,17 @@ class Product
     public function preUpdate()
     {
         $this->setUpdatedAt(new \DateTime());
+    }
+
+    public function getPartner(): ?Partner
+    {
+        return $this->partner;
+    }
+
+    public function setPartner(?Partner $partner): self
+    {
+        $this->partner = $partner;
+
+        return $this;
     }
 }
