@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Mh\PageBundle\Repository\PartnerRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Partner
 {
@@ -24,7 +25,7 @@ class Partner
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $urlAffiliate;
 
@@ -63,6 +64,17 @@ class Partner
      */
     private $network;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $programReference;
+
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -91,7 +103,7 @@ class Partner
         return $this->urlAffiliate;
     }
 
-    public function setUrlAffiliate(string $urlAffiliate): self
+    public function setUrlAffiliate(?string $urlAffiliate): self
     {
         $this->urlAffiliate = $urlAffiliate;
 
@@ -216,6 +228,35 @@ class Partner
     public function setNetwork(string $network): self
     {
         $this->network = $network;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate()
+    {
+        $this->setUpdatedAt(new \DateTime());
+    }
+
+    public function getProgramReference(): ?string
+    {
+        return $this->programReference;
+    }
+
+    public function setProgramReference(?string $programReference): self
+    {
+        $this->programReference = $programReference;
 
         return $this;
     }
