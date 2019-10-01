@@ -57,6 +57,11 @@ class Coupon
      */
     private $partner;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $terms;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -171,6 +176,18 @@ class Coupon
     public function setPartner(?Partner $partner): self
     {
         $this->partner = $partner;
+
+        return $this;
+    }
+
+    public function getTerms(): ?string
+    {
+        return $this->terms;
+    }
+
+    public function setTerms(?string $terms): self
+    {
+        $this->terms = $terms;
 
         return $this;
     }

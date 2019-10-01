@@ -22,6 +22,7 @@ class CouponType extends AbstractType
         $builder
             ->add('couponCode', null, $opt)
             ->add('description', null, $opt)
+            ->add('terms', null, $opt)
             ->add('offerUrl', null, $opt)
             ->add('partner', null, $opt)
             ->add('validFrom')
