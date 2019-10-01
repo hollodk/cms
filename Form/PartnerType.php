@@ -15,6 +15,7 @@ class PartnerType extends AbstractType
             ->add('name')
             ->add('urlAffiliate')
             ->add('logoUrl')
+            ->add('network')
             ->add('commission')
             ->add('createdAt')
             ->add('updatedAt')

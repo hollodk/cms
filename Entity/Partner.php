@@ -58,6 +58,11 @@ class Partner
      */
     private $coupons;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $network;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -199,6 +204,18 @@ class Partner
                 $coupon->setPartner(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNetwork(): ?string
+    {
+        return $this->network;
+    }
+
+    public function setNetwork(string $network): self
+    {
+        $this->network = $network;
 
         return $this;
     }
