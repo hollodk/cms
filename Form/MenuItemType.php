@@ -33,6 +33,7 @@ class MenuItemType extends AbstractType
                 'attr' => $attr,
                 'class' => 'MhPageBundle:Page',
             ])
+            ->add('isActive')
         ;
     }
 

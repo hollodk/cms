@@ -57,6 +57,11 @@ class MenuItem
      */
     private $url;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActive = true;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -171,6 +176,18 @@ class MenuItem
     public function setUrl(?string $url): self
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    public function getIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
 
         return $this;
     }
