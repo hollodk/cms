@@ -39,6 +39,11 @@ class Seller
      */
     private $products;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Mh\PageBundle\Entity\Coupon", mappedBy="seller")
+     */
+    private $coupons;
+
 
     public function __toString()
     {
@@ -48,6 +53,7 @@ class Seller
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->coupons = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -137,5 +143,36 @@ class Seller
     public function preUpdate()
     {
         $this->setUpdatedAt(new \DateTime());
+    }
+
+    /**
+     * @return Collection|Coupon[]
+     */
+    public function getCoupons(): Collection
+    {
+        return $this->coupons;
+    }
+
+    public function addCoupon(Coupon $coupon): self
+    {
+        if (!$this->coupons->contains($coupon)) {
+            $this->coupons[] = $coupon;
+            $coupon->setSeller($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCoupon(Coupon $coupon): self
+    {
+        if ($this->coupons->contains($coupon)) {
+            $this->coupons->removeElement($coupon);
+            // set the owning side to null (unless already changed)
+            if ($coupon->getSeller() === $this) {
+                $coupon->setSeller(null);
+            }
+        }
+
+        return $this;
     }
 }

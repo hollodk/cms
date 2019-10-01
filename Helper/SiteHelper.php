@@ -105,6 +105,11 @@ class SiteHelper
             'name' => 'Seller',
         ];
 
+        $this->list[100]['items'][1400] = [
+            'url' => 'mh_page_coupon_index',
+            'name' => 'Coupon',
+        ];
+
         $this->list[300] = [
             'url' => 'mh_page_app_logout',
             'name' => 'Logout',
