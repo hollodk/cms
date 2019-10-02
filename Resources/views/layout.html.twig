@@ -9,9 +9,7 @@
 
         <title>{% block title %}{{ config.site.title }}{% endblock %}</title>
 
-        <link href="{{ asset('bundles/mhpage/css/plugins.css') }}" rel="stylesheet">
-        <link href="{{ asset('bundles/mhpage/css/style.css') }}" rel="stylesheet">
-        <link href="{{ asset('bundles/mhpage/css/responsive.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/mhpage/css/2xmin.css') }}" rel="stylesheet">
 
         {% block stylesheets %}{% endblock %}
     </head>
@@ -77,10 +75,8 @@
         </div>
 
         <a id="scrollTop"><i class="icon-chevron-up1"></i><i class="icon-chevron-up1"></i></a>
-        <script src="{{ asset('bundles/mhpage/js/jquery.js') }}"></script>
-        <script src="{{ asset('bundles/mhpage/js/plugins.js') }}"></script>
-        <script src="{{ asset('bundles/mhpage/js/functions.js') }}"></script>
-        <script src="{{ asset('bundles/mhpage/js/frontend.js') }}"></script>
+
+        <script src="{{ asset('bundles/mhpage/js/min.js') }}"></script>
 
         {% if config.main.google is defined and config.main.google %}
         <!-- Global site tag (gtag.js) - Google Analytics -->

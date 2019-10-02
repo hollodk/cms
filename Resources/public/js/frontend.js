@@ -18,3 +18,5 @@ function prettyPrint(element) {
     element.value = pretty;
 }
 
+const observer = lozad();
+observer.observe();
