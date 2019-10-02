@@ -8,8 +8,13 @@
         {% if seo is defined %}
         {% set pg_title = seo.title %}
         {% set pg_description = seo.description %}
+
+        {% if seo.json is defined %}
         {{ seo.json|raw }}
+        {% endif %}
+        {% if seo.og is defined %}
         {{ seo.og.renderTags|raw }}
+        {% endif %}
 
         {% else %}
         {% set pg_title = config.site.title %}
