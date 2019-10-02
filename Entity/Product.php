@@ -297,4 +297,13 @@ class Product
 
         return $this;
     }
+
+    public function getCurrentPrice()
+    {
+        if ($this->getPriceDiscount() > 0 && $this->getPriceDiscount() < $this->getPrice()) {
+            return $this->getPriceDiscount();
+        }
+
+        return $this->getPrice();
+    }
 }

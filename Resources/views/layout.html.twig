@@ -4,10 +4,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="author" content="{% block author %}{{ config.main.author }}{% endblock %}" />
-        <meta name="description" content="{% block description %}{{ config.main.description }}{% endblock %}">
-        {% block meta %}{% endblock %}
 
-        <title>{% block title %}{{ config.site.title }}{% endblock %}</title>
+        {% if seo is defined %}
+        {% set pg_title = seo.title %}
+        {% set pg_description = seo.description %}
+        {{ seo.json|raw }}
+        {{ seo.og.renderTags|raw }}
+
+        {% else %}
+        {% set pg_title = config.site.title %}
+        {% set pg_description = config.main.description %}
+        {% endif %}
+
+        <meta name="description" content="{% block description %}{{ pg_description }}{% endblock %}">
+        <title>{% block title %}{{ pg_title }}{% endblock %}</title>
+
+        {% block meta %}{% endblock %}
 
         <link href="{{ asset('bundles/mhpage/css/2xmin.css') }}" rel="stylesheet">
 
