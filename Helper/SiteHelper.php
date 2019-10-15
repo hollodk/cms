@@ -161,21 +161,24 @@ class SiteHelper
     public function setDefaults()
     {
         $site = $this->getSite();
-        $config = json_decode($site->getAttribute(), true);
 
-        $this->twig->setSite($this->getSite());
-        $this->twig->setMenu($this->getMenu());
-        $this->twig->setConfig($config);
+        if ($site) {
+            $config = json_decode($site->getAttribute(), true);
 
-        $items = $this->em->getRepository('MhPageBundle:MenuItem')->findBy(
-            [
-                'menu' => $this->getMenu(),
-                'isActive' => true,
-            ],
-            ['priority' => 'ASC']
-        );
+            $this->twig->setSite($this->getSite());
+            $this->twig->setMenu($this->getMenu());
+            $this->twig->setConfig($config);
 
-        $this->twig->setMenuItems($items);
+            $items = $this->em->getRepository('MhPageBundle:MenuItem')->findBy(
+                [
+                    'menu' => $this->getMenu(),
+                    'isActive' => true,
+                ],
+                ['priority' => 'ASC']
+            );
+
+            $this->twig->setMenuItems($items);
+        }
     }
 
     public function build(Request $request, Page $page)
