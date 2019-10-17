@@ -21,7 +21,8 @@ knp_paginator:
 add this to your twig config, so we have a global configuration service
 
 twig:
-    globals: 'Mh\PageBundle\Helper\TwigHelper'
+    globals:
+        config: 'Mh\PageBundle\Helper\TwigHelper'
 
 
 ### security
@@ -32,10 +33,7 @@ security:
     encoders:
         Mh\PageBundle\Entity\User:
             algorithm: auto
-
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
                 class: Mh\PageBundle\Entity\User
@@ -51,17 +49,6 @@ security:
                     - Mh\PageBundle\Security\AppCustomAuthenticator
             logout:
                 path: mh_page_app_logout
-                # where to redirect after logout
-                # target: app_any_route
-
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#firewalls-authentication
-
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
