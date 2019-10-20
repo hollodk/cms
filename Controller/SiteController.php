@@ -34,17 +34,6 @@ class SiteController extends AbstractController
     }
 
     /**
-     * @Route("/install", name="site_install")
-     */
-    public function install(Request $request): Response
-    {
-        $helper = $this->get('Mh\PageBundle\Helper\SiteHelper');
-        $helper->installSite();
-
-        return $this->redirectToRoute('mh_page_main');
-    }
-
-    /**
      * @Route("/new", name="site_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response

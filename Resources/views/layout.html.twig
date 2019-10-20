@@ -39,6 +39,8 @@
             <main id="main">
             {% include "@MhPage/main/page_title.html.twig" %}
 
+            {% block main %}{% endblock %}
+
             {% set sidebar = config.sidebar %}
 
             {% if config.content is not defined or config.content.hide_container is not defined or config.content.hide_container == false %}

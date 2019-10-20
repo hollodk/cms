@@ -17,12 +17,13 @@ knp_paginator:
         sortable: '@KnpPaginator/Pagination/sortable_link.html.twig'
         filtration: '@KnpPaginator/Pagination/filtration.html.twig'
 
+
 ### twig
 add this to your twig config, so we have a global configuration service
 
 twig:
     globals:
-        config: 'Mh\PageBundle\Helper\TwigHelper'
+        config: '@Mh\PageBundle\Helper\TwigHelper'
 
 
 ### security
@@ -53,6 +54,7 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
 
+
 ### routes
 
 /config/routes.yaml
@@ -61,19 +63,9 @@ mh_page:
     resource: '@MhPageBundle/Resources/config/routes.yaml'
 
 
-### doctrine
+### install demo
 
-/config/packages/doctrine.yaml
-
-doctrine:
-    orm:
-        mappings:
-            MhPageBundle:
-                is_bundle: true
-                type: annotation
-                dir: 'Entity'
-                prefix: 'Mh\PageBundle\Entity'
-                alias: 'MhPageBundle'
+app/bin app:install
 
 
 ### change the redirect after login
@@ -113,18 +105,36 @@ and on your element
 
 ./bin/console assets:install --symlink
 
+
 ## Extend admin menu
 
 If you need to add more admin items, make a subscriber with
 
 make:subscriber for the request
 
-And then extend Mh\PageBundle\Helper\SiteHelper
 
+use Mh\PageBundle\Helper\SiteHelper;
 
-## Make a user
+class RequestSubscriber implements EventSubscriberInterface
+{
+    private $siteHelper;
 
-make:user login
+    public function __construct(SiteHelper $siteHelper)
+    {
+        $this->siteHelper = $siteHelper;
+    }
+
+    public function onRequestEvent(RequestEvent $event)
+    {
+        if (!$event->isMasterRequest()) return;
+
+        $item = [
+            'url' => 'profile_dashboard',
+            'name' => 'Min profil',
+        ];
+        $this->siteHelper->addAdminItem($item, 5);
+    }
+}
 
 
 ## Sitemap

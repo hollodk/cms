@@ -122,6 +122,17 @@ class SiteHelper
         ];
     }
 
+    public function addAdminItems($items)
+    {
+        foreach ($items as $item) {
+            if (isset($item->key)) {
+                $this->addAdminItem($item, $item->key);
+            } else {
+                $this->addAdminItem($item);
+            }
+        }
+    }
+
     public function addAdminItem($item, $key=null)
     {
         if ($key) {
@@ -378,7 +389,7 @@ class SiteHelper
     },
     "content": {},
     "header": {
-        "type": "dark",
+        "type": "light",
         "fullwidth": true,
         "menu_position": "right",
         "transparent": false,
