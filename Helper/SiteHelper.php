@@ -397,7 +397,7 @@ class SiteHelper
         "modern": false,
         "mini": false,
         "logo": "left",
-        "fixed_disabled": true
+        "fixed_disabled": false
     },
     "sidebar": {
         "type": "right",
