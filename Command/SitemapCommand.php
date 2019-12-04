@@ -45,5 +45,7 @@ class SitemapCommand extends Command
         $urls = $sitemapHelper->buildUrls();
 
         $sitemapHelper->write($hostname, $urls, $input->getArgument('output'));
+
+        return 0;
     }
 }

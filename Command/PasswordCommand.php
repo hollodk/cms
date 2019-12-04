@@ -54,5 +54,7 @@ class PasswordCommand extends Command
 
         $io = new SymfonyStyle($input, $output);
         $io->success('Password has been changed for '.$user->getEmail());
+
+        return 0;
     }
 }

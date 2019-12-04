@@ -46,5 +46,7 @@ class TagCommand extends Command
         }
 
         $em->flush();
+
+        return 0;
     }
 }

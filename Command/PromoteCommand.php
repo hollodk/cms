@@ -47,5 +47,7 @@ class PromoteCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $io->success('User '.$user->getEmail().' has been promoted to admin');
+
+        return 0;
     }
 }

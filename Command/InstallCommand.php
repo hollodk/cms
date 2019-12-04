@@ -34,5 +34,7 @@ class InstallCommand extends Command
     {
         $helper = $this->container->get('Mh\PageBundle\Helper\SiteHelper');
         $helper->installSite();
+
+        return 0;
     }
 }
